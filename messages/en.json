@@ -1,0 +1,125 @@
+{
+  "Meta": {
+    "title": "Taksu Tech receptionist robot kiosk demo",
+    "description": "Try the Timo and Snow receptionist robot touchscreens: queue tickets, directions, organisation chart, Aksara Bali, and an AI assistant."
+  },
+  "Launcher": {
+    "title": "Receptionist robot kiosk demo",
+    "intro": "Pick a robot and a sample venue. This is the same screen shown on the robot’s 13.3-inch touchscreen.",
+    "recommended": "Recommended",
+    "openAt": "Open at {site}",
+    "tip": "Use the full-screen button at the top right for a lobby-like experience.",
+    "backToSite": "Back to the Taksu Tech website",
+    "sampleNote": "All names, numbers, and schedules in this demo are sample data."
+  },
+  "Kiosk": {
+    "sample": "Sample data",
+    "touchToStart": "Touch the screen to start",
+    "home": "Main menu",
+    "voiceOn": "Turn voice off",
+    "voiceOff": "Turn voice on",
+    "fullscreen": "Full screen",
+    "language": "Language",
+    "faceLabel": "{robot} is {mood}",
+    "moods": {
+      "idle": "waiting",
+      "listening": "listening",
+      "thinking": "thinking",
+      "speaking": "speaking",
+      "happy": "happy"
+    },
+    "menu": {
+      "about": { "title": "About this place", "body": "Profile, opening hours, and address" },
+      "organization": { "title": "Organisation chart", "body": "Who is in charge, and where" },
+      "wayfinding": { "title": "Directions", "body": "I will walk you to any room" },
+      "queue": { "title": "Take a queue number", "body": "Your number and an estimated wait" },
+      "assistant": { "title": "Ask {robot}", "body": "Ask a question, by voice if you like" },
+      "aksara": { "title": "Your name in Aksara Bali", "body": "A keepsake from Bali" },
+      "culture": { "title": "Balinese customs", "body": "Local ways worth knowing" }
+    },
+    "lines": {
+      "home": "Please choose a menu on the screen.",
+      "about": "Welcome to {site}.",
+      "organization": "Here is our organisation chart. Touch a name to see their room.",
+      "wayfinding": "Where would you like to go? Pick a destination and I will show you the way.",
+      "queue": "Choose a service to take a queue number.",
+      "assistant": "Go ahead, ask me anything.",
+      "aksara": "Type your name and I will write it in Aksara Bali.",
+      "culture": "Here are a few Balinese customs worth knowing."
+    }
+  },
+  "About": {
+    "facts": "Information"
+  },
+  "Organization": {
+    "room": "Room",
+    "takeMe": "Take me to this room",
+    "select": "Touch a name to see their room."
+  },
+  "Wayfinding": {
+    "choose": "Choose a destination",
+    "categories": {
+      "service": "Services",
+      "office": "Offices",
+      "facility": "Facilities",
+      "dining": "Dining",
+      "wellness": "Wellness",
+      "leisure": "Leisure"
+    },
+    "distance": "About {meters} metres, {minutes, plural, =0 {under a minute} one {# minute} other {# minutes}} on foot",
+    "escort": "Walk me there",
+    "readAloud": "Read directions aloud",
+    "escorting": "Follow me!",
+    "arrived": "Here we are at {room}.",
+    "steps": {
+      "start": "Go straight for {meters} metres",
+      "left": "Turn left, then go straight for {meters} metres",
+      "right": "Turn right, then go straight for {meters} metres",
+      "arrive": "Arrive at {room}"
+    },
+    "empty": "Choose a destination to see the route on the map.",
+    "mapLabel": "Map of {site}"
+  },
+  "Queue": {
+    "choose": "Choose a service",
+    "average": "About {minutes} minutes per guest",
+    "take": "Take a number",
+    "ticketTitle": "Your queue number",
+    "inAksara": "In Balinese numerals",
+    "ahead": "{count, plural, =0 {Nobody is ahead of you} one {# person ahead of you} other {# people ahead of you}}",
+    "estimate": "Estimated wait {minutes} minutes",
+    "counter": "Served at {counter}",
+    "issued": "Taken at {time} WITA",
+    "print": "Print ticket",
+    "guide": "Take me to {counter}",
+    "done": "Done",
+    "line": "Your number is {code}. Please wait to be called at {counter}."
+  },
+  "Assistant": {
+    "placeholder": "Type your question",
+    "send": "Send",
+    "listen": "Speak",
+    "stopListening": "Stop listening",
+    "suggestions": "Try asking",
+    "thinking": "{robot} is thinking",
+    "error": "Sorry, I cannot answer right now. Please try again, or ask a member of staff.",
+    "offline": "Offline mode: answers come from this venue’s data.",
+    "takeMe": "Take me to {room}",
+    "you": "You"
+  },
+  "Aksara": {
+    "label": "Your name",
+    "placeholder": "Type a name, for example Wayan",
+    "hint": "A plain e reads like the e in Ketut. Type é for the sound in Madé.",
+    "empty": "Your Aksara Bali will appear here",
+    "note": "Automatic transliteration. For inscriptions or official signs, ask a Balinese language adviser to review it."
+  },
+  "Calendar": {
+    "holyToday": "Rahajeng rahina {name}"
+  },
+  "NotFound": {
+    "title": "Screen not found",
+    "body": "This robot or sample venue is not available.",
+    "back": "Choose another demo"
+  }
+}

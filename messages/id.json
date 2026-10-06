@@ -1,0 +1,125 @@
+{
+  "Meta": {
+    "title": "Demo kios robot resepsionis Taksu Tech",
+    "description": "Coba layar sentuh robot resepsionis Timo dan Snow: antrean, petunjuk arah, struktur organisasi, Aksara Bali, dan asisten AI."
+  },
+  "Launcher": {
+    "title": "Demo kios robot resepsionis",
+    "intro": "Pilih robot dan contoh tempat. Layar ini sama dengan yang tampil di layar sentuh 13,3 inci robot.",
+    "recommended": "Disarankan",
+    "openAt": "Buka di {site}",
+    "tip": "Gunakan tombol layar penuh di pojok kanan atas untuk pengalaman seperti di lobi.",
+    "backToSite": "Kembali ke situs Taksu Tech",
+    "sampleNote": "Semua nama, nomor, dan jadwal di demo ini adalah data contoh."
+  },
+  "Kiosk": {
+    "sample": "Data contoh",
+    "touchToStart": "Sentuh layar untuk mulai",
+    "home": "Menu utama",
+    "voiceOn": "Matikan suara",
+    "voiceOff": "Nyalakan suara",
+    "fullscreen": "Layar penuh",
+    "language": "Bahasa",
+    "faceLabel": "{robot} {mood}",
+    "moods": {
+      "idle": "sedang menunggu",
+      "listening": "sedang mendengarkan",
+      "thinking": "sedang berpikir",
+      "speaking": "sedang berbicara",
+      "happy": "sedang senang"
+    },
+    "menu": {
+      "about": { "title": "Tentang tempat ini", "body": "Profil, jam layanan, dan alamat" },
+      "organization": { "title": "Struktur organisasi", "body": "Siapa yang bertugas dan di mana" },
+      "wayfinding": { "title": "Petunjuk arah", "body": "Saya antar ke ruangan tujuan" },
+      "queue": { "title": "Ambil antrean", "body": "Nomor antrean dan perkiraan waktu tunggu" },
+      "assistant": { "title": "Tanya {robot}", "body": "Ajukan pertanyaan, boleh dengan suara" },
+      "aksara": { "title": "Nama dalam Aksara Bali", "body": "Kenang-kenangan dari Bali" },
+      "culture": { "title": "Adat Bali", "body": "Kebiasaan setempat yang baik diketahui" }
+    },
+    "lines": {
+      "home": "Silakan pilih menu di layar.",
+      "about": "Selamat datang di {site}.",
+      "organization": "Ini struktur organisasi kami. Sentuh nama untuk melihat ruangannya.",
+      "wayfinding": "Mau ke mana? Pilih tujuan, nanti saya tunjukkan jalannya.",
+      "queue": "Pilih layanan untuk mengambil nomor antrean.",
+      "assistant": "Silakan bertanya.",
+      "aksara": "Ketik nama Anda, saya tuliskan dalam Aksara Bali.",
+      "culture": "Ini beberapa kebiasaan di Bali yang baik untuk diketahui."
+    }
+  },
+  "About": {
+    "facts": "Informasi"
+  },
+  "Organization": {
+    "room": "Ruangan",
+    "takeMe": "Antar ke ruangan ini",
+    "select": "Sentuh salah satu nama untuk melihat ruangannya."
+  },
+  "Wayfinding": {
+    "choose": "Pilih tujuan",
+    "categories": {
+      "service": "Layanan",
+      "office": "Kantor",
+      "facility": "Fasilitas",
+      "dining": "Makan",
+      "wellness": "Kebugaran",
+      "leisure": "Rekreasi"
+    },
+    "distance": "Sekitar {meters} meter, {minutes, plural, =0 {kurang dari 1 menit} other {# menit}} berjalan kaki",
+    "escort": "Antar saya",
+    "readAloud": "Bacakan arah",
+    "escorting": "Ikuti saya ya!",
+    "arrived": "Kita sudah sampai di {room}.",
+    "steps": {
+      "start": "Jalan lurus {meters} meter",
+      "left": "Belok kiri, lalu lurus {meters} meter",
+      "right": "Belok kanan, lalu lurus {meters} meter",
+      "arrive": "Tiba di {room}"
+    },
+    "empty": "Pilih tujuan untuk melihat rutenya di denah.",
+    "mapLabel": "Denah {site}"
+  },
+  "Queue": {
+    "choose": "Pilih layanan",
+    "average": "Rata-rata {minutes} menit per tamu",
+    "take": "Ambil nomor",
+    "ticketTitle": "Nomor antrean Anda",
+    "inAksara": "Dalam angka Bali",
+    "ahead": "{count, plural, =0 {Tidak ada antrean di depan Anda} other {# orang di depan Anda}}",
+    "estimate": "Perkiraan menunggu {minutes} menit",
+    "counter": "Dilayani di {counter}",
+    "issued": "Diambil pukul {time} WITA",
+    "print": "Cetak tiket",
+    "guide": "Antar ke {counter}",
+    "done": "Selesai",
+    "line": "Nomor Anda {code}. Silakan tunggu panggilan di {counter}."
+  },
+  "Assistant": {
+    "placeholder": "Tulis pertanyaan Anda",
+    "send": "Kirim",
+    "listen": "Bicara",
+    "stopListening": "Berhenti mendengarkan",
+    "suggestions": "Coba tanyakan",
+    "thinking": "{robot} sedang berpikir",
+    "error": "Maaf, saya belum bisa menjawab sekarang. Coba lagi, atau tanyakan ke petugas.",
+    "offline": "Mode offline: jawaban dari data tempat ini.",
+    "takeMe": "Antar ke {room}",
+    "you": "Anda"
+  },
+  "Aksara": {
+    "label": "Nama Anda",
+    "placeholder": "Ketik nama, misalnya Wayan",
+    "hint": "Huruf e dibaca pepet seperti pada Ketut. Ketik é untuk bunyi seperti pada Madé.",
+    "empty": "Aksara Bali akan muncul di sini",
+    "note": "Transliterasi otomatis. Untuk prasasti atau papan nama resmi, mintalah tinjauan penyuluh Bahasa Bali."
+  },
+  "Calendar": {
+    "holyToday": "Rahajeng rahina {name}"
+  },
+  "NotFound": {
+    "title": "Layar tidak ditemukan",
+    "body": "Robot atau contoh tempat ini tidak tersedia.",
+    "back": "Pilih demo lain"
+  }
+}
