@@ -29,13 +29,34 @@
       "happy": "happy"
     },
     "menu": {
-      "about": { "title": "About this place", "body": "Profile, opening hours, and address" },
-      "organization": { "title": "Organisation chart", "body": "Who is in charge, and where" },
-      "wayfinding": { "title": "Directions", "body": "I will walk you to any room" },
-      "queue": { "title": "Take a queue number", "body": "Your number and an estimated wait" },
-      "assistant": { "title": "Ask {robot}", "body": "Ask a question, by voice if you like" },
-      "aksara": { "title": "Your name in Aksara Bali", "body": "A keepsake from Bali" },
-      "culture": { "title": "Balinese customs", "body": "Local ways worth knowing" }
+      "about": {
+        "title": "About this place",
+        "body": "Profile, opening hours, and address"
+      },
+      "organization": {
+        "title": "Organisation chart",
+        "body": "Who is in charge, and where"
+      },
+      "wayfinding": {
+        "title": "Directions",
+        "body": "I will walk you to any room"
+      },
+      "queue": {
+        "title": "Take a queue number",
+        "body": "Your number and an estimated wait"
+      },
+      "assistant": {
+        "title": "Ask {robot}",
+        "body": "Ask a question, by voice if you like"
+      },
+      "aksara": {
+        "title": "Your name in Aksara Bali",
+        "body": "A keepsake from Bali"
+      },
+      "culture": {
+        "title": "Balinese customs",
+        "body": "Local ways worth knowing"
+      }
     },
     "lines": {
       "home": "Please choose a menu on the screen.",
@@ -105,7 +126,8 @@
     "error": "Sorry, I cannot answer right now. Please try again, or ask a member of staff.",
     "offline": "Offline mode: answers come from this venue’s data.",
     "takeMe": "Take me to {room}",
-    "you": "You"
+    "you": "You",
+    "rateLimited": "That was a lot of questions at once. Please wait a moment, then ask again."
   },
   "Aksara": {
     "label": "Your name",

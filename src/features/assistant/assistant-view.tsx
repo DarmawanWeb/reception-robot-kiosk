@@ -72,6 +72,14 @@ export function AssistantView({
           messages: history.map(({ role, content: text }) => ({ role, content: text })),
         }),
       });
+      if (response.status === 429) {
+        setMessages((current) => [
+          ...current,
+          { id: nextId.current++, role: 'assistant', content: t('rateLimited') },
+        ]);
+        actions.setMood('idle');
+        return;
+      }
       if (!response.ok) throw new Error(`Assistant responded ${response.status}`);
       const data = (await response.json()) as AssistantResponse;
       setMessages((current) => [

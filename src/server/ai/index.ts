@@ -2,6 +2,7 @@ import { readAiConfig, type AiConfig } from '@/lib/ai-config';
 import { detectRoom } from './intents';
 import { buildSystemPrompt } from './prompt';
 import { anthropicComplete } from './providers/anthropic';
+import { ollamaComplete } from './providers/ollama';
 import { offlineReply } from './providers/offline';
 import { openAiCompatibleComplete } from './providers/openai-compatible';
 import type { AssistantReply, AssistantRequest, ChatTurn } from './types';
@@ -23,10 +24,18 @@ export function normalizeTurns(messages: ChatTurn[]): ChatTurn[] {
 async function modelReply(config: AiConfig, request: AssistantRequest): Promise<string> {
   const system = buildSystemPrompt(request);
   const turns = normalizeTurns(request.messages);
-  return config.provider === 'anthropic'
-    ? anthropicComplete(config, system, turns)
-    : openAiCompatibleComplete(config, system, turns);
+  switch (config.provider) {
+    case 'anthropic':
+      return anthropicComplete(config, system, turns);
+    case 'ollama':
+      return ollamaComplete(config, system, turns);
+    default:
+      return openAiCompatibleComplete(config, system, turns);
+  }
 }
+
+/** Model calls in flight in this server process (one PM2 process per app). */
+let activeModelCalls = 0;
 
 export async function generateReply(
   request: AssistantRequest,
@@ -38,10 +47,17 @@ export async function generateReply(
   const action = room ? ({ type: 'navigate', roomId: room.id } as const) : undefined;
 
   if (config.provider !== 'offline') {
-    try {
-      return { reply: await modelReply(config, request), source: 'model', action };
-    } catch (error) {
-      console.error('[assistant] model call failed, answering offline', error);
+    if (activeModelCalls >= config.maxConcurrency) {
+      console.warn('[assistant] model busy, answering offline');
+    } else {
+      activeModelCalls += 1;
+      try {
+        return { reply: await modelReply(config, request), source: 'model', action };
+      } catch (error) {
+        console.error('[assistant] model call failed, answering offline', error);
+      } finally {
+        activeModelCalls -= 1;
+      }
     }
   }
   return { reply: offlineReply(request), source: 'offline', action };

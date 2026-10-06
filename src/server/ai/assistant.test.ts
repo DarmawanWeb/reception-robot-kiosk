@@ -39,6 +39,8 @@ describe('room intent', () => {
     const reply = await generateReply(ask('Di mana toilet?'), {
       provider: 'offline',
       timeoutMs: 1000,
+      keepAlive: '1m',
+      maxConcurrency: 1,
     });
     expect(reply).toMatchObject({
       source: 'offline',

@@ -29,13 +29,34 @@
       "happy": "sedang senang"
     },
     "menu": {
-      "about": { "title": "Tentang tempat ini", "body": "Profil, jam layanan, dan alamat" },
-      "organization": { "title": "Struktur organisasi", "body": "Siapa yang bertugas dan di mana" },
-      "wayfinding": { "title": "Petunjuk arah", "body": "Saya antar ke ruangan tujuan" },
-      "queue": { "title": "Ambil antrean", "body": "Nomor antrean dan perkiraan waktu tunggu" },
-      "assistant": { "title": "Tanya {robot}", "body": "Ajukan pertanyaan, boleh dengan suara" },
-      "aksara": { "title": "Nama dalam Aksara Bali", "body": "Kenang-kenangan dari Bali" },
-      "culture": { "title": "Adat Bali", "body": "Kebiasaan setempat yang baik diketahui" }
+      "about": {
+        "title": "Tentang tempat ini",
+        "body": "Profil, jam layanan, dan alamat"
+      },
+      "organization": {
+        "title": "Struktur organisasi",
+        "body": "Siapa yang bertugas dan di mana"
+      },
+      "wayfinding": {
+        "title": "Petunjuk arah",
+        "body": "Saya antar ke ruangan tujuan"
+      },
+      "queue": {
+        "title": "Ambil antrean",
+        "body": "Nomor antrean dan perkiraan waktu tunggu"
+      },
+      "assistant": {
+        "title": "Tanya {robot}",
+        "body": "Ajukan pertanyaan, boleh dengan suara"
+      },
+      "aksara": {
+        "title": "Nama dalam Aksara Bali",
+        "body": "Kenang-kenangan dari Bali"
+      },
+      "culture": {
+        "title": "Adat Bali",
+        "body": "Kebiasaan setempat yang baik diketahui"
+      }
     },
     "lines": {
       "home": "Silakan pilih menu di layar.",
@@ -105,7 +126,8 @@
     "error": "Maaf, saya belum bisa menjawab sekarang. Coba lagi, atau tanyakan ke petugas.",
     "offline": "Mode offline: jawaban dari data tempat ini.",
     "takeMe": "Antar ke {room}",
-    "you": "Anda"
+    "you": "Anda",
+    "rateLimited": "Banyak pertanyaan dalam waktu singkat. Tunggu sebentar, lalu tanya lagi ya."
   },
   "Aksara": {
     "label": "Nama Anda",

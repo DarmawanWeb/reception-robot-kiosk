@@ -1,6 +1,13 @@
 import { getRobot, getSite, locales } from '@taksu/content';
 import { z } from 'zod';
 import { generateReply } from '@/server/ai';
+import { clientKey, createRateLimiter } from '@/server/rate-limit';
+
+/** Per-visitor budget for questions; protects a small home server running a local model. */
+const limiter = createRateLimiter({
+  limit: Number(process.env.ASSISTANT_RATE_LIMIT) || 12,
+  windowMs: 60_000,
+});
 
 const bodySchema = z.object({
   robot: z.string().max(32),
@@ -19,6 +26,13 @@ const bodySchema = z.object({
 
 /** POST /api/assistant: answers a visitor's question for a robot at a sample venue. */
 export async function POST(request: Request) {
+  const { allowed, retryAfterSeconds } = limiter.check(clientKey(request.headers));
+  if (!allowed) {
+    return Response.json(
+      { error: 'rate_limited' },
+      { status: 429, headers: { 'retry-after': String(retryAfterSeconds) } },
+    );
+  }
   const parsed = bodySchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) {
     return Response.json({ error: 'invalid_request' }, { status: 400 });
