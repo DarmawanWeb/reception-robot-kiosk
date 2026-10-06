@@ -1,12 +1,14 @@
 'use client';
 
 import { pick, type KioskSite, type Locale, type RoomCategory } from '@taksu/content';
+import { AksaraText } from '@taksu/ui/brand/aksara-text';
 import { Button } from '@taksu/ui/components/button';
 import { cn } from '@taksu/ui/lib/utils';
-import { Footprints, Volume2 } from 'lucide-react';
+import { Footprints, Printer, Volume2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import type { KioskActions } from '../kiosk/types';
+import { PrintSlip, QrImage } from '../print/print-slip';
 import { FloorPlan } from './floor-plan';
 import { describeRoute, findRoute, type RouteStep } from './route';
 
@@ -24,16 +26,21 @@ export function WayfindingView({
   site,
   locale,
   initialRoomId,
+  canEscort,
   actions,
 }: {
   site: KioskSite;
   locale: Locale;
   initialRoomId: string | null;
+  /** Mobile robots walk guests there; the static kiosk prints a route slip instead. */
+  canEscort: boolean;
   actions: Pick<KioskActions, 'say' | 'setMood'>;
 }) {
   const t = useTranslations('Wayfinding');
+  const tPrint = useTranslations('Print');
   const [roomId, setRoomId] = useState<string | null>(initialRoomId);
   const [escortRun, setEscortRun] = useState(0);
+  const [slipUrl, setSlipUrl] = useState<string | null>(null);
   const room = site.map.rooms.find((entry) => entry.id === roomId);
 
   const route = useMemo(
@@ -59,6 +66,11 @@ export function WayfindingView({
     }))
     .filter((group) => group.rooms.length > 0);
 
+  function printRouteSlip(id: string) {
+    setSlipUrl(`${window.location.origin}${window.location.pathname}?view=wayfinding&room=${id}`);
+    window.setTimeout(() => window.print(), 350);
+  }
+
   return (
     <div className="grid gap-6 xl:grid-cols-[20rem_1fr]">
       <nav aria-label={t('choose')} className="flex flex-col gap-4">
@@ -77,6 +89,7 @@ export function WayfindingView({
                     onClick={() => {
                       setRoomId(entry.id);
                       setEscortRun(0);
+                      setSlipUrl(null);
                     }}
                     className={cn(
                       'min-h-12 rounded-full border px-4 text-base font-semibold transition-colors',
@@ -126,17 +139,25 @@ export function WayfindingView({
                 </li>
               ))}
             </ol>
+            {!canEscort ? <p className="text-muted-foreground text-sm">{t('noEscort')}</p> : null}
             <div className="flex flex-wrap gap-3">
-              <Button
-                size="xl"
-                onClick={() => {
-                  actions.say(t('escorting'));
-                  setEscortRun((run) => run + 1);
-                }}
-              >
-                <Footprints aria-hidden />
-                {t('escort')}
-              </Button>
+              {canEscort ? (
+                <Button
+                  size="xl"
+                  onClick={() => {
+                    actions.say(t('escorting'));
+                    setEscortRun((run) => run + 1);
+                  }}
+                >
+                  <Footprints aria-hidden />
+                  {t('escort')}
+                </Button>
+              ) : (
+                <Button size="xl" onClick={() => printRouteSlip(room.id)}>
+                  <Printer aria-hidden />
+                  {tPrint('routeSlip')}
+                </Button>
+              )}
               <Button
                 size="xl"
                 variant="outline"
@@ -146,6 +167,29 @@ export function WayfindingView({
                 {t('readAloud')}
               </Button>
             </div>
+            {slipUrl ? (
+              <PrintSlip className="text-left">
+                <AksaraText
+                  latin={site.name}
+                  decorative
+                  className="text-primary block text-center text-sm"
+                />
+                <p className="text-center font-semibold">{site.name}</p>
+                <p className="font-display mt-3 text-center text-xl font-bold">
+                  {tPrint('routeTitle')}
+                </p>
+                <p className="text-center text-lg font-semibold">{roomName}</p>
+                <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm">
+                  {directions.steps.map((step, index) => (
+                    <li key={`slip-${index}`}>{stepText(step)}</li>
+                  ))}
+                </ol>
+                <div className="mt-4 text-center">
+                  <QrImage value={slipUrl} size={112} label={tPrint('scanMap')} />
+                  <p className="text-muted-foreground mt-1 text-xs">{tPrint('scanMap')}</p>
+                </div>
+              </PrintSlip>
+            ) : null}
           </div>
         ) : (
           <p className="text-muted-foreground text-lg">{t('empty')}</p>

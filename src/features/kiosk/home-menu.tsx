@@ -1,22 +1,26 @@
 'use client';
 
-import type { CommercialRobot } from '@taksu/content';
+import type { ReceptionRobot } from '@taksu/content';
 import {
   BookOpen,
   Flower2,
   Info,
   MessagesSquare,
+  Mic,
   Network,
+  NotebookPen,
   Route,
   Ticket,
   type LucideIcon,
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { menuViews, type MenuView } from './types';
+import type { MenuView } from './types';
 
 const icons: Record<MenuView, LucideIcon> = {
-  wayfinding: Route,
+  voice: Mic,
   queue: Ticket,
+  guestbook: NotebookPen,
+  wayfinding: Route,
   assistant: MessagesSquare,
   about: Info,
   organization: Network,
@@ -26,22 +30,28 @@ const icons: Record<MenuView, LucideIcon> = {
 
 export function HomeMenu({
   robot,
+  views,
   onSelect,
 }: {
-  robot: CommercialRobot;
+  robot: ReceptionRobot;
+  views: readonly MenuView[];
   onSelect: (view: MenuView) => void;
 }) {
   const t = useTranslations('Kiosk.menu');
   return (
     <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-      {menuViews.map((view, index) => {
+      {views.map((view, index) => {
         const Icon = icons[view];
         return (
-          <li key={view} className={index < 3 ? 'xl:row-span-1' : undefined}>
+          <li key={view}>
             <button
               type="button"
               onClick={() => onSelect(view)}
-              className="border-border bg-surface hover:border-primary active:bg-surface-muted flex h-full min-h-32 w-full items-start gap-4 rounded-xl border p-5 text-left transition-colors"
+              className={
+                index === 0
+                  ? 'border-primary bg-surface active:bg-surface-muted flex h-full min-h-32 w-full items-start gap-4 rounded-xl border-2 p-5 text-left transition-colors'
+                  : 'border-border bg-surface hover:border-primary active:bg-surface-muted flex h-full min-h-32 w-full items-start gap-4 rounded-xl border p-5 text-left transition-colors'
+              }
             >
               <span className="bg-primary text-primary-foreground flex size-14 shrink-0 items-center justify-center rounded-full">
                 <Icon className="size-7" aria-hidden />

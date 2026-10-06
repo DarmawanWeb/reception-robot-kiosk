@@ -10,7 +10,10 @@
     "openAt": "Buka di {site}",
     "tip": "Gunakan tombol layar penuh di pojok kanan atas untuk pengalaman seperti di lobi.",
     "backToSite": "Kembali ke situs Taksu Tech",
-    "sampleNote": "Semua nama, nomor, dan jadwal di demo ini adalah data contoh."
+    "sampleNote": "Semua nama, nomor, dan jadwal di demo ini adalah data contoh.",
+    "studioTitle": "Punya instansi sendiri?",
+    "studioBody": "Rakit kios dengan nama dan papan Aksara Bali instansi Anda di Studio.",
+    "studioCta": "Buka Studio"
   },
   "Kiosk": {
     "sample": "Data contoh",
@@ -56,6 +59,14 @@
       "culture": {
         "title": "Adat Bali",
         "body": "Kebiasaan setempat yang baik diketahui"
+      },
+      "voice": {
+        "title": "Ngobrol dengan {robot}",
+        "body": "Tekan mikrofon, bertanya langsung"
+      },
+      "guestbook": {
+        "title": "Buku tamu",
+        "body": "Isi data, kartu tamu langsung tercetak"
       }
     },
     "lines": {
@@ -66,7 +77,13 @@
       "queue": "Pilih layanan untuk mengambil nomor antrean.",
       "assistant": "Silakan bertanya.",
       "aksara": "Ketik nama Anda, saya tuliskan dalam Aksara Bali.",
-      "culture": "Ini beberapa kebiasaan di Bali yang baik untuk diketahui."
+      "culture": "Ini beberapa kebiasaan di Bali yang baik untuk diketahui.",
+      "voice": "Silakan tekan tombol mikrofon, lalu bicara.",
+      "guestbook": "Silakan isi data kunjungan Anda."
+    },
+    "printer": {
+      "builtIn": "Printer bawaan",
+      "station": "Stasiun printer"
     }
   },
   "About": {
@@ -99,7 +116,8 @@
       "arrive": "Tiba di {room}"
     },
     "empty": "Pilih tujuan untuk melihat rutenya di denah.",
-    "mapLabel": "Denah {site}"
+    "mapLabel": "Denah {site}",
+    "noEscort": "Kios ini tidak berjalan. Cetak slip rute atau pindai QR untuk membuka peta di HP."
   },
   "Queue": {
     "choose": "Pilih layanan",
@@ -143,5 +161,71 @@
     "title": "Layar tidak ditemukan",
     "body": "Robot atau contoh tempat ini tidak tersedia.",
     "back": "Pilih demo lain"
+  },
+  "Voice": {
+    "tapToTalk": "Tekan untuk bicara",
+    "tapToStop": "Tekan untuk selesai",
+    "listening": "Mendengarkan…",
+    "thinking": "{robot} sedang berpikir",
+    "speaking": "{robot} sedang menjawab",
+    "notHeard": "Maaf, suara Anda belum terdengar. Coba lagi lebih dekat ke mikrofon.",
+    "micDenied": "Izin mikrofon ditolak. Izinkan mikrofon di browser, atau ketik pertanyaan.",
+    "unsupported": "Perekaman suara tidak tersedia di perangkat ini. Silakan ketik pertanyaan.",
+    "engineServer": "Suara diproses di server lokal",
+    "engineBrowser": "Suara diproses oleh browser",
+    "typeInstead": "Atau ketik pertanyaan",
+    "you": "Anda",
+    "empty": "Riwayat percakapan akan muncul di sini."
+  },
+  "Guestbook": {
+    "title": "Buku tamu",
+    "intro": "Data hanya disimpan di perangkat ini untuk demo.",
+    "name": "Nama lengkap",
+    "origin": "Asal atau instansi",
+    "purpose": "Keperluan",
+    "purposes": {
+      "meet": "Bertemu pegawai",
+      "service": "Mengurus layanan",
+      "visit": "Kunjungan",
+      "delivery": "Antar dokumen atau barang",
+      "other": "Lainnya"
+    },
+    "host": "Bertemu dengan",
+    "hostUnknown": "Belum tahu",
+    "phone": "Nomor HP (opsional)",
+    "submit": "Daftar dan cetak kartu",
+    "required": "Isi nama dan keperluan terlebih dahulu.",
+    "passTitle": "Kartu tamu",
+    "passId": "Nomor kartu",
+    "room": "Ruangan",
+    "issued": "Masuk pukul {time} WITA",
+    "returnNote": "Kembalikan kartu ini di meja depan saat pulang.",
+    "print": "Cetak kartu tamu",
+    "guide": "Antar ke {room}",
+    "done": "Selesai",
+    "thanks": "Terima kasih, {name}. Kartu tamu Anda siap."
+  },
+  "Print": {
+    "routeSlip": "Cetak slip rute",
+    "routeTitle": "Slip rute",
+    "scanMap": "Pindai untuk membuka peta di HP",
+    "scanQueue": "Pindai untuk memantau antrean",
+    "printing": "Mencetak…"
+  },
+  "Studio": {
+    "metaTitle": "Studio kios Taksu",
+    "title": "Rakit kios Anda sendiri",
+    "intro": "Ketik nama instansi, pilih robot dan fitur, lalu buka kios kustom. Pengaturan disimpan di browser ini.",
+    "robot": "Robot",
+    "base": "Contoh data dasar",
+    "name": "Nama instansi atau usaha",
+    "tagline": "Kalimat singkat",
+    "features": "Menu yang aktif",
+    "signage": "Papan nama digital",
+    "open": "Buka kios kustom",
+    "back": "Kembali ke peluncur",
+    "missing": "Belum ada kios kustom. Buat dulu di Studio.",
+    "toStudio": "Buka Studio",
+    "customNote": "Kios kustom: data contoh disesuaikan dengan nama Anda."
   }
 }

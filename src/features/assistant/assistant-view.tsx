@@ -1,13 +1,13 @@
 'use client';
 
-import { pick, type CommercialRobot, type KioskSite, type Locale } from '@taksu/content';
+import { pick, type KioskSite, type Locale, type ReceptionRobot } from '@taksu/content';
 import { Button } from '@taksu/ui/components/button';
 import { cn } from '@taksu/ui/lib/utils';
-import { Mic, MicOff, Route, Send } from 'lucide-react';
+import { Route, Send } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import type { KioskActions } from '../kiosk/types';
-import { listenOnce, useSpeechSupport } from '../kiosk/speech';
+import { askAssistant } from './ask';
 
 interface Message {
   id: number;
@@ -17,40 +17,32 @@ interface Message {
   offline?: boolean;
 }
 
-interface AssistantResponse {
-  reply: string;
-  source: 'model' | 'offline';
-  action?: { type: 'navigate'; roomId: string };
-}
-
+/** Text chat with the robot, grounded in the venue data. */
 export function AssistantView({
   robot,
   site,
+  siteName,
   locale,
   actions,
 }: {
-  robot: CommercialRobot;
+  robot: ReceptionRobot;
   site: KioskSite;
+  siteName?: string;
   locale: Locale;
   actions: KioskActions;
 }) {
   const t = useTranslations('Assistant');
-  const support = useSpeechSupport();
   const [messages, setMessages] = useState<Message[]>([
     { id: 0, role: 'assistant', content: pick(robot.persona.greeting, locale) },
   ]);
   const [draft, setDraft] = useState('');
   const [pending, setPending] = useState(false);
-  const [listening, setListening] = useState(false);
-  const stopListening = useRef<(() => void) | null>(null);
   const listEnd = useRef<HTMLDivElement>(null);
   const nextId = useRef(1);
 
   useEffect(() => {
     listEnd.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [messages, pending]);
-
-  useEffect(() => () => stopListening.current?.(), []);
 
   async function ask(question: string) {
     const content = question.trim();
@@ -60,64 +52,37 @@ export function AssistantView({
     setDraft('');
     setPending(true);
     actions.setMood('thinking');
-
-    try {
-      const response = await fetch('/api/assistant', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          robot: robot.slug,
-          site: site.slug,
-          locale,
-          messages: history.map(({ role, content: text }) => ({ role, content: text })),
-        }),
-      });
-      if (response.status === 429) {
-        setMessages((current) => [
-          ...current,
-          { id: nextId.current++, role: 'assistant', content: t('rateLimited') },
-        ]);
-        actions.setMood('idle');
-        return;
-      }
-      if (!response.ok) throw new Error(`Assistant responded ${response.status}`);
-      const data = (await response.json()) as AssistantResponse;
+    const result = await askAssistant({
+      robot: robot.slug,
+      site: site.slug,
+      siteName,
+      locale,
+      messages: history.map(({ role, content: text }) => ({ role, content: text })),
+    });
+    setPending(false);
+    if (!result.ok) {
       setMessages((current) => [
         ...current,
         {
           id: nextId.current++,
           role: 'assistant',
-          content: data.reply,
-          roomId: data.action?.roomId,
-          offline: data.source === 'offline',
+          content: result.reason === 'rate_limited' ? t('rateLimited') : t('error'),
         },
       ]);
-      actions.say(data.reply);
-    } catch {
-      setMessages((current) => [
-        ...current,
-        { id: nextId.current++, role: 'assistant', content: t('error') },
-      ]);
       actions.setMood('idle');
-    } finally {
-      setPending(false);
-    }
-  }
-
-  function toggleListening() {
-    if (listening) {
-      stopListening.current?.();
       return;
     }
-    setListening(true);
-    actions.setMood('listening');
-    stopListening.current = listenOnce(locale, {
-      onResult: (transcript) => void ask(transcript),
-      onEnd: () => {
-        setListening(false);
-        stopListening.current = null;
+    setMessages((current) => [
+      ...current,
+      {
+        id: nextId.current++,
+        role: 'assistant',
+        content: result.reply,
+        roomId: result.roomId,
+        offline: result.source === 'offline',
       },
-    });
+    ]);
+    actions.say(result.reply);
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -172,7 +137,6 @@ export function AssistantView({
         ) : null}
         <div ref={listEnd} />
       </ol>
-
       <div>
         <p className="text-muted-foreground mb-2 text-sm font-semibold">{t('suggestions')}</p>
         <ul className="flex flex-wrap gap-2">
@@ -190,20 +154,7 @@ export function AssistantView({
           ))}
         </ul>
       </div>
-
       <form onSubmit={handleSubmit} className="flex gap-2">
-        {support.stt ? (
-          <Button
-            type="button"
-            size="xl"
-            variant={listening ? 'default' : 'outline'}
-            aria-pressed={listening}
-            aria-label={listening ? t('stopListening') : t('listen')}
-            onClick={toggleListening}
-          >
-            {listening ? <MicOff aria-hidden /> : <Mic aria-hidden />}
-          </Button>
-        ) : null}
         <input
           value={draft}
           onChange={(event) => setDraft(event.target.value)}

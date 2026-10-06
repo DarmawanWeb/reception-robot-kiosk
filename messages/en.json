@@ -10,7 +10,10 @@
     "openAt": "Open at {site}",
     "tip": "Use the full-screen button at the top right for a lobby-like experience.",
     "backToSite": "Back to the Taksu Tech website",
-    "sampleNote": "All names, numbers, and schedules in this demo are sample data."
+    "sampleNote": "All names, numbers, and schedules in this demo are sample data.",
+    "studioTitle": "Have your own organisation?",
+    "studioBody": "Build a kiosk with your name and Aksara Bali sign in Studio.",
+    "studioCta": "Open Studio"
   },
   "Kiosk": {
     "sample": "Sample data",
@@ -56,6 +59,14 @@
       "culture": {
         "title": "Balinese customs",
         "body": "Local ways worth knowing"
+      },
+      "voice": {
+        "title": "Talk with {robot}",
+        "body": "Press the mic and just ask"
+      },
+      "guestbook": {
+        "title": "Guest book",
+        "body": "Register and get a printed pass"
       }
     },
     "lines": {
@@ -66,7 +77,13 @@
       "queue": "Choose a service to take a queue number.",
       "assistant": "Go ahead, ask me anything.",
       "aksara": "Type your name and I will write it in Aksara Bali.",
-      "culture": "Here are a few Balinese customs worth knowing."
+      "culture": "Here are a few Balinese customs worth knowing.",
+      "voice": "Press the microphone button, then speak.",
+      "guestbook": "Please fill in your visit details."
+    },
+    "printer": {
+      "builtIn": "Built-in printer",
+      "station": "Printer station"
     }
   },
   "About": {
@@ -99,7 +116,8 @@
       "arrive": "Arrive at {room}"
     },
     "empty": "Choose a destination to see the route on the map.",
-    "mapLabel": "Map of {site}"
+    "mapLabel": "Map of {site}",
+    "noEscort": "This kiosk does not move. Print a route slip or scan the QR to open the map on your phone."
   },
   "Queue": {
     "choose": "Choose a service",
@@ -143,5 +161,71 @@
     "title": "Screen not found",
     "body": "This robot or sample venue is not available.",
     "back": "Choose another demo"
+  },
+  "Voice": {
+    "tapToTalk": "Tap to talk",
+    "tapToStop": "Tap to finish",
+    "listening": "Listening…",
+    "thinking": "{robot} is thinking",
+    "speaking": "{robot} is answering",
+    "notHeard": "Sorry, I did not catch that. Please try again closer to the microphone.",
+    "micDenied": "Microphone permission was denied. Allow it in the browser, or type your question.",
+    "unsupported": "Voice recording is not available on this device. Please type your question.",
+    "engineServer": "Voice processed on the local server",
+    "engineBrowser": "Voice processed by the browser",
+    "typeInstead": "Or type your question",
+    "you": "You",
+    "empty": "The conversation will appear here."
+  },
+  "Guestbook": {
+    "title": "Guest book",
+    "intro": "For this demo, data stays on this device only.",
+    "name": "Full name",
+    "origin": "From or organisation",
+    "purpose": "Purpose",
+    "purposes": {
+      "meet": "Meeting a staff member",
+      "service": "Using a service",
+      "visit": "Visit",
+      "delivery": "Delivering documents or goods",
+      "other": "Other"
+    },
+    "host": "Meeting with",
+    "hostUnknown": "Not sure yet",
+    "phone": "Phone (optional)",
+    "submit": "Register and print pass",
+    "required": "Fill in your name and purpose first.",
+    "passTitle": "Visitor pass",
+    "passId": "Pass number",
+    "room": "Room",
+    "issued": "Checked in at {time} WITA",
+    "returnNote": "Please return this pass at the front desk when you leave.",
+    "print": "Print visitor pass",
+    "guide": "Take me to {room}",
+    "done": "Done",
+    "thanks": "Thank you, {name}. Your visitor pass is ready."
+  },
+  "Print": {
+    "routeSlip": "Print route slip",
+    "routeTitle": "Route slip",
+    "scanMap": "Scan to open the map on your phone",
+    "scanQueue": "Scan to follow the queue",
+    "printing": "Printing…"
+  },
+  "Studio": {
+    "metaTitle": "Taksu kiosk Studio",
+    "title": "Build your own kiosk",
+    "intro": "Type your organisation’s name, choose a robot and features, then open a custom kiosk. Settings stay in this browser.",
+    "robot": "Robot",
+    "base": "Sample data to start from",
+    "name": "Organisation or business name",
+    "tagline": "Short tagline",
+    "features": "Enabled menus",
+    "signage": "Digital sign",
+    "open": "Open custom kiosk",
+    "back": "Back to the launcher",
+    "missing": "No custom kiosk yet. Create one in Studio first.",
+    "toStudio": "Open Studio",
+    "customNote": "Custom kiosk: sample data adapted to your name."
   }
 }

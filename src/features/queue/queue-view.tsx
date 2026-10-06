@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
 import { formatWitaTime } from '../kiosk/hooks';
 import type { KioskActions } from '../kiosk/types';
+import { PrintSlip, QrImage } from '../print/print-slip';
 import { issueTicket, parseCounters, queueStorageKey, type QueueTicket } from './queue';
 
 function useIssueTicket(siteSlug: string) {
@@ -46,40 +47,47 @@ export function QueueView({
   onDone: () => void;
 }) {
   const t = useTranslations('Queue');
+  const tPrint = useTranslations('Print');
   const issue = useIssueTicket(site.slug);
-  const [ticket, setTicket] = useState<{ ticket: QueueTicket; service: QueueService } | null>(null);
+  const [issued, setIssued] = useState<{
+    ticket: QueueTicket;
+    service: QueueService;
+    trackUrl: string;
+  } | null>(null);
 
-  if (ticket) {
-    const { service } = ticket;
+  if (issued) {
+    const { ticket, service } = issued;
     const counter = pick(service.counter, locale);
     return (
       <div className="flex flex-col items-start gap-6">
-        <article className="print-ticket border-border bg-surface w-full max-w-md rounded-xl border-2 border-dashed p-8 text-center">
+        <PrintSlip>
           <AksaraText latin={site.name} decorative className="text-primary block text-sm" />
           <p className="font-semibold">{site.name}</p>
           <p className="text-muted-foreground mt-4">{t('ticketTitle')}</p>
           <p className="font-display text-7xl font-bold tracking-tight tabular-nums">
-            {ticket.ticket.code}
+            {ticket.code}
           </p>
           <p className="text-muted-foreground mt-1 text-sm">
             {t('inAksara')}:{' '}
             <AksaraText
-              aksara={toBalineseDigits(ticket.ticket.number)}
+              aksara={toBalineseDigits(ticket.number)}
               className="text-foreground text-2xl"
             />
           </p>
           <p className="mt-4 text-lg font-semibold">{pick(service.name, locale)}</p>
           <p>{t('counter', { counter })}</p>
-          <p className="mt-4">{t('ahead', { count: ticket.ticket.peopleAhead })}</p>
-          {ticket.ticket.peopleAhead > 0 ? (
-            <p className="font-semibold">
-              {t('estimate', { minutes: ticket.ticket.estimatedMinutes })}
-            </p>
+          <p className="mt-4">{t('ahead', { count: ticket.peopleAhead })}</p>
+          {ticket.peopleAhead > 0 ? (
+            <p className="font-semibold">{t('estimate', { minutes: ticket.estimatedMinutes })}</p>
           ) : null}
-          <p className="text-muted-foreground mt-4 text-xs">
-            {t('issued', { time: formatWitaTime(ticket.ticket.issuedAt, locale) })}
+          <div className="mt-4">
+            <QrImage value={issued.trackUrl} size={112} label={tPrint('scanQueue')} />
+            <p className="text-muted-foreground mt-1 text-xs">{tPrint('scanQueue')}</p>
+          </div>
+          <p className="text-muted-foreground mt-3 text-xs">
+            {t('issued', { time: formatWitaTime(ticket.issuedAt, locale) })}
           </p>
-        </article>
+        </PrintSlip>
         <div className="flex flex-wrap gap-3">
           <Button size="xl" onClick={() => window.print()}>
             <Printer aria-hidden />
@@ -112,11 +120,12 @@ export function QueueView({
             <button
               type="button"
               onClick={() => {
-                const issued = issue(service);
-                setTicket({ ticket: issued, service });
+                const ticket = issue(service);
+                const trackUrl = `${window.location.origin}${window.location.pathname}?view=queue&ticket=${ticket.code}`;
+                setIssued({ ticket, service, trackUrl });
                 actions.setMood('happy');
                 actions.say(
-                  t('line', { code: issued.code, counter: pick(service.counter, locale) }),
+                  t('line', { code: ticket.code, counter: pick(service.counter, locale) }),
                 );
               }}
               className="border-border bg-surface hover:border-primary flex h-full w-full items-center gap-5 rounded-xl border p-5 text-left transition-colors"

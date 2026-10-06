@@ -1,4 +1,4 @@
-import type { CommercialRobot, KioskSite, Locale } from '@taksu/content';
+import type { ReceptionRobot, KioskSite, Locale } from '@taksu/content';
 
 export interface ChatTurn {
   role: 'user' | 'assistant';
@@ -6,7 +6,7 @@ export interface ChatTurn {
 }
 
 export interface AssistantRequest {
-  robot: CommercialRobot;
+  robot: ReceptionRobot;
   site: KioskSite;
   locale: Locale;
   messages: ChatTurn[];

@@ -12,6 +12,8 @@ const limiter = createRateLimiter({
 const bodySchema = z.object({
   robot: z.string().max(32),
   site: z.string().max(64),
+  /** Display name for custom Studio kiosks built on a sample venue. */
+  siteName: z.string().trim().min(1).max(80).optional(),
   locale: z.enum(locales),
   messages: z
     .array(
@@ -45,7 +47,7 @@ export async function POST(request: Request) {
 
   const reply = await generateReply({
     robot,
-    site,
+    site: parsed.data.siteName ? { ...site, name: parsed.data.siteName } : site,
     locale: parsed.data.locale,
     messages: parsed.data.messages.slice(-10),
   });

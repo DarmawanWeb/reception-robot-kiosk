@@ -22,11 +22,11 @@
   body * {
     visibility: hidden;
   }
-  .print-ticket,
-  .print-ticket * {
+  .print-slip,
+  .print-slip * {
     visibility: visible;
   }
-  .print-ticket {
+  .print-slip {
     position: absolute;
     top: 0;
     left: 0;
