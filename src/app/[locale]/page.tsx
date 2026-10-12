@@ -1,4 +1,4 @@
-import { kioskSites, pick, robots } from '@taksu/content';
+import { kioskSites, names, pick, robots } from '@taksu/content';
 import { Logo } from '@taksu/ui/brand/logo';
 import { PolengBand } from '@taksu/ui/brand/ornaments';
 import { RobotFace } from '@taksu/ui/brand/robot-face';
@@ -12,7 +12,11 @@ import { LanguageToggle } from '@/features/kiosk/language-toggle';
 import { Link } from '@/i18n/navigation';
 import { resolveLocale } from '@/lib/locale';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+/** The receptionist robot site these demos belong to. */
+const robotSiteUrl = (process.env.NEXT_PUBLIC_ROBOT_URL ?? 'http://localhost:3004').replace(
+  /\/+$/,
+  '',
+);
 
 /** Demo launcher: every robot at every sample venue, plus the Studio. */
 export default async function LauncherPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -23,7 +27,7 @@ export default async function LauncherPage({ params }: { params: Promise<{ local
     <div className="min-h-dvh">
       <PolengBand />
       <header className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-5 sm:px-8">
-        <a href={`${siteUrl}/${locale}/reception`} aria-label={t('backToSite')}>
+        <a href={`${robotSiteUrl}/${locale}`} aria-label={t('backToSite', { brand: names.robot })}>
           <Logo />
         </a>
         <LanguageToggle />
