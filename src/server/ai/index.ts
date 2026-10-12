@@ -1,9 +1,9 @@
-import { readAiConfig, type AiConfig } from '@/lib/ai-config';
+import { type AiConfig, readAiConfig } from '@/lib/ai-config';
 import { detectRoom } from './intents';
 import { buildSystemPrompt } from './prompt';
 import { anthropicComplete } from './providers/anthropic';
-import { ollamaComplete } from './providers/ollama';
 import { offlineReply } from './providers/offline';
+import { ollamaComplete } from './providers/ollama';
 import { openAiCompatibleComplete } from './providers/openai-compatible';
 import type { AssistantReply, AssistantRequest, ChatTurn } from './types';
 
@@ -11,14 +11,13 @@ import type { AssistantReply, AssistantRequest, ChatTurn } from './types';
 export function normalizeTurns(messages: ChatTurn[]): ChatTurn[] {
   const firstUser = messages.findIndex((turn) => turn.role === 'user');
   if (firstUser === -1) return [];
-  return messages.slice(firstUser).reduce<ChatTurn[]>((turns, turn) => {
+  const turns: ChatTurn[] = [];
+  for (const turn of messages.slice(firstUser)) {
     const previous = turns.at(-1);
-    if (previous?.role === turn.role) {
-      previous.content = `${previous.content}\n${turn.content}`;
-      return turns;
-    }
-    return [...turns, { ...turn }];
-  }, []);
+    if (previous?.role === turn.role) previous.content = `${previous.content}\n${turn.content}`;
+    else turns.push({ ...turn });
+  }
+  return turns;
 }
 
 async function modelReply(config: AiConfig, request: AssistantRequest): Promise<string> {

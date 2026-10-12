@@ -1,6 +1,6 @@
 'use client';
 
-import { pick, type KioskSite, type Locale, type RoomCategory } from '@taksu/content';
+import { type KioskSite, type Locale, pick, type RoomCategory } from '@taksu/content';
 import { AksaraText } from '@taksu/ui/brand/aksara-text';
 import { Button } from '@taksu/ui/components/button';
 import { cn } from '@taksu/ui/lib/utils';
@@ -131,7 +131,11 @@ export function WayfindingView({
             </p>
             <ol className="flex flex-col gap-2">
               {directions.steps.map((step, index) => (
-                <li key={`${step.kind}-${index}`} className="flex items-center gap-3 text-lg">
+                <li
+                  // biome-ignore lint/suspicious/noArrayIndexKey: steps are rebuilt from the route and never reorder
+                  key={`${step.kind}-${index}`}
+                  className="flex items-center gap-3 text-lg"
+                >
                   <span className="bg-primary text-primary-foreground flex size-8 shrink-0 items-center justify-center rounded-full text-sm font-bold">
                     {index + 1}
                   </span>
@@ -181,6 +185,7 @@ export function WayfindingView({
                 <p className="text-center text-lg font-semibold">{roomName}</p>
                 <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm">
                   {directions.steps.map((step, index) => (
+                    // biome-ignore lint/suspicious/noArrayIndexKey: steps are rebuilt from the route and never reorder
                     <li key={`slip-${index}`}>{stepText(step)}</li>
                   ))}
                 </ol>

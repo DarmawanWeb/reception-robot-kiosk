@@ -2,7 +2,7 @@
 
 import { cn } from '@taksu/ui/lib/utils';
 import QRCode from 'qrcode';
-import { useEffect, useState, type ReactNode } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 
 /**
  * 80 mm thermal-receipt layout. Only `.print-slip` is visible when printing, so the
@@ -47,7 +47,7 @@ export function QrImage({
   }, [value, size]);
 
   return src ? (
-    // eslint-disable-next-line @next/next/no-img-element -- data URL generated on the device
+    // biome-ignore lint/performance/noImgElement: the QR is a data URL generated on the device
     <img
       src={src}
       alt={label}

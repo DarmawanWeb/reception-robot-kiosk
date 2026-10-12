@@ -15,8 +15,7 @@ export function LanguageToggle({ className }: { className?: string }) {
   const [pending, startTransition] = useTransition();
 
   return (
-    <div
-      role="group"
+    <fieldset
       aria-label={t('language')}
       className={cn('bg-surface-muted flex rounded-md p-1', className)}
     >
@@ -37,6 +36,6 @@ export function LanguageToggle({ className }: { className?: string }) {
           {option}
         </button>
       ))}
-    </div>
+    </fieldset>
   );
 }

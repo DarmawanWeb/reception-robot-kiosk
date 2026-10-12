@@ -1,11 +1,11 @@
 'use client';
 
-import { pick, type KioskSite, type Locale, type ReceptionRobot } from '@taksu/content';
+import { type KioskSite, type Locale, pick, type ReceptionRobot } from '@taksu/content';
 import { Button } from '@taksu/ui/components/button';
 import { cn } from '@taksu/ui/lib/utils';
 import { Route, Send } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { type FormEvent, useEffect, useRef, useState } from 'react';
 import type { KioskActions } from '../kiosk/types';
 import { askAssistant } from './ask';
 
@@ -40,6 +40,7 @@ export function AssistantView({
   const listEnd = useRef<HTMLDivElement>(null);
   const nextId = useRef(1);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: scroll to the newest message whenever the list changes
   useEffect(() => {
     listEnd.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [messages, pending]);
