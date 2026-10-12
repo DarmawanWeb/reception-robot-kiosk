@@ -1,15 +1,15 @@
 'use client';
 
-import { pick, type KioskSite, type Locale, type ReceptionRobot } from '@taksu/content';
+import { type KioskSite, type Locale, pick, type ReceptionRobot } from '@taksu/content';
 import { Button } from '@taksu/ui/components/button';
 import { cn } from '@taksu/ui/lib/utils';
 import { Mic, Route, Send, Square } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { useEffect, useRef, useState, useSyncExternalStore, type FormEvent } from 'react';
+import { type FormEvent, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { askAssistant } from '../assistant/ask';
 import { listenOnce, stopSpeaking, useSpeechSupport } from '../kiosk/speech';
 import type { KioskActions } from '../kiosk/types';
-import { startRecording, stopServerSpeech, transcribe, type Recording } from './audio';
+import { type Recording, startRecording, stopServerSpeech, transcribe } from './audio';
 import { createLevelStore, type LevelStore } from './level-store';
 import type { SpeechServerStatus } from './use-speech-server';
 

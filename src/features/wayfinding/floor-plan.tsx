@@ -1,8 +1,8 @@
 'use client';
 
-import { pick, type KioskSite, type Locale, type RoomCategory } from '@taksu/content';
+import { type KioskSite, type Locale, pick, type RoomCategory } from '@taksu/content';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { pointAlong, routePoints, type Point } from './route';
+import { type Point, pointAlong, routePoints } from './route';
 
 const categoryFill: Record<RoomCategory, string> = {
   service: 'var(--primary)',

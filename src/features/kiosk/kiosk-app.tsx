@@ -1,6 +1,6 @@
 'use client';
 
-import { getRobot, pick, type KioskSite, type RobotSlug } from '@taksu/content';
+import { getRobot, type KioskSite, pick, type RobotSlug } from '@taksu/content';
 import type { RobotMood } from '@taksu/ui/brand/robot-face';
 import { Button } from '@taksu/ui/components/button';
 import { cn } from '@taksu/ui/lib/utils';
@@ -26,7 +26,7 @@ import { IdleScreen } from './idle-screen';
 import { KioskHeader } from './kiosk-header';
 import { LiveFace } from './live-face';
 import { speak, stopSpeaking, useSpeechSupport } from './speech';
-import { menuViews, parseView, type KioskActions, type KioskView, type MenuView } from './types';
+import { type KioskActions, type KioskView, type MenuView, menuViews, parseView } from './types';
 
 const IDLE_TIMEOUT_MS = 90_000;
 

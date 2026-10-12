@@ -1,8 +1,8 @@
-import { getRobot, getSite } from '@taksu/content';
 import { createServer, type Server } from 'node:http';
 import type { AddressInfo } from 'node:net';
+import { getRobot, getSite } from '@taksu/content';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { readAiConfig, type AiConfig } from '@/lib/ai-config';
+import { type AiConfig, readAiConfig } from '@/lib/ai-config';
 import { generateReply } from './index';
 import { stripThinking } from './providers/ollama';
 import type { AssistantRequest } from './types';

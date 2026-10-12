@@ -1,4 +1,4 @@
-import { pick, type Locale } from '@taksu/content';
+import { type Locale, pick } from '@taksu/content';
 import { detectRoom } from '../intents';
 import { overlap, tokenize } from '../text';
 import type { AssistantRequest } from '../types';

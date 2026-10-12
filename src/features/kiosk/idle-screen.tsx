@@ -1,7 +1,7 @@
 'use client';
 
 import { OM_SWASTIASTU } from '@taksu/bali';
-import type { ReceptionRobot, KioskSite } from '@taksu/content';
+import type { KioskSite, ReceptionRobot } from '@taksu/content';
 import { AksaraText } from '@taksu/ui/brand/aksara-text';
 import { RobotFace } from '@taksu/ui/brand/robot-face';
 import { useTranslations } from 'next-intl';

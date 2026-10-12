@@ -1,7 +1,7 @@
 'use client';
 
 import { toBalineseDigits } from '@taksu/bali';
-import { pick, type KioskSite, type Locale, type QueueService } from '@taksu/content';
+import { type KioskSite, type Locale, pick, type QueueService } from '@taksu/content';
 import { AksaraText } from '@taksu/ui/brand/aksara-text';
 import { Button } from '@taksu/ui/components/button';
 import { Printer, Route } from 'lucide-react';
@@ -10,7 +10,7 @@ import { useCallback, useState } from 'react';
 import { formatWitaTime } from '../kiosk/hooks';
 import type { KioskActions } from '../kiosk/types';
 import { PrintSlip, QrImage } from '../print/print-slip';
-import { issueTicket, parseCounters, queueStorageKey, type QueueTicket } from './queue';
+import { issueTicket, parseCounters, type QueueTicket, queueStorageKey } from './queue';
 
 function useIssueTicket(siteSlug: string) {
   return useCallback(

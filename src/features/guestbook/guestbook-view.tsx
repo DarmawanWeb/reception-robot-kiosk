@@ -1,12 +1,12 @@
 'use client';
 
 import { transliterate } from '@taksu/bali';
-import { flattenOrganization, pick, type KioskSite, type Locale } from '@taksu/content';
+import { flattenOrganization, type KioskSite, type Locale, pick } from '@taksu/content';
 import { AksaraText } from '@taksu/ui/brand/aksara-text';
 import { Button } from '@taksu/ui/components/button';
 import { Printer, Route } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { useState, type FormEvent } from 'react';
+import { type FormEvent, useState } from 'react';
 import { formatWitaTime } from '../kiosk/hooks';
 import type { KioskActions } from '../kiosk/types';
 import { PrintSlip, QrImage } from '../print/print-slip';
@@ -15,8 +15,8 @@ import {
   nextSequence,
   passId,
   passQrPayload,
-  type VisitPurpose,
   type VisitorPass,
+  type VisitPurpose,
 } from './guestbook';
 
 const purposes: VisitPurpose[] = ['meet', 'service', 'visit', 'delivery', 'other'];

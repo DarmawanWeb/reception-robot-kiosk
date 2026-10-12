@@ -1,6 +1,6 @@
 'use client';
 
-import { pick, type KioskSite, type Locale } from '@taksu/content';
+import { type KioskSite, type Locale, pick } from '@taksu/content';
 import { AksaraText } from '@taksu/ui/brand/aksara-text';
 import { useTranslations } from 'next-intl';
 

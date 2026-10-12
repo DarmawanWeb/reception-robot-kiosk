@@ -1,7 +1,7 @@
 'use client';
 
 import { OM_SWASTIASTU } from '@taksu/bali';
-import { pick, type KioskSite, type Locale } from '@taksu/content';
+import { type KioskSite, type Locale, pick } from '@taksu/content';
 import { AksaraText } from '@taksu/ui/brand/aksara-text';
 
 export function CultureView({ site, locale }: { site: KioskSite; locale: Locale }) {

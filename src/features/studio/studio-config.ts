@@ -1,5 +1,5 @@
-import { getRobot, getSite, robots, type KioskSite, type RobotSlug } from '@taksu/content';
-import { menuViews, type MenuView } from '../kiosk/types';
+import { getRobot, getSite, type KioskSite, type RobotSlug, robots } from '@taksu/content';
+import { type MenuView, menuViews } from '../kiosk/types';
 
 export const STUDIO_KEY = 'taksu-kiosk:studio';
 

@@ -6,9 +6,9 @@ import { RobotFace } from '@taksu/ui/brand/robot-face';
 import { Button } from '@taksu/ui/components/button';
 import { cn } from '@taksu/ui/lib/utils';
 import { useTranslations } from 'next-intl';
-import { useState, type FormEvent } from 'react';
+import { type FormEvent, useState } from 'react';
 import { useRouter } from '@/i18n/navigation';
-import { menuViews, type MenuView } from '../kiosk/types';
+import { type MenuView, menuViews } from '../kiosk/types';
 import { defaultStudioConfig, STUDIO_KEY, type StudioConfig } from './studio-config';
 
 /** Lets a prospect brand a kiosk with their own name and Aksara Bali sign. */

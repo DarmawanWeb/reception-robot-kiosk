@@ -1,4 +1,4 @@
-import { speechHealth, type SpeechHealth } from '@/server/speech';
+import { type SpeechHealth, speechHealth } from '@/server/speech';
 
 let cached: { value: SpeechHealth; expires: number } | null = null;
 

@@ -2,10 +2,10 @@
 
 import {
   flattenOrganization,
-  pick,
   type KioskSite,
   type Locale,
   type OrgNode,
+  pick,
 } from '@taksu/content';
 import { Button } from '@taksu/ui/components/button';
 import { cn } from '@taksu/ui/lib/utils';

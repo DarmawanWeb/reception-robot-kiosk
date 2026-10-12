@@ -1,4 +1,4 @@
-import { locales, type Locale } from '@taksu/content';
+import { type Locale, locales } from '@taksu/content';
 import { clientKey, createRateLimiter } from '@/server/rate-limit';
 import { transcribeAudio } from '@/server/speech';
 

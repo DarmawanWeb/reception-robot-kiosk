@@ -5,13 +5,13 @@ import {
   BookOpen,
   Flower2,
   Info,
+  type LucideIcon,
   MessagesSquare,
   Mic,
   Network,
   NotebookPen,
   Route,
   Ticket,
-  type LucideIcon,
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import type { MenuView } from './types';
