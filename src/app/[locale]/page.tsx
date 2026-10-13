@@ -66,23 +66,39 @@ export default async function LauncherPage({ params }: { params: Promise<{ local
                 {pick(robot.summary, locale)}
               </p>
               <ul className="mt-6 flex flex-col gap-3">
-                {kioskSites.map((site) => (
-                  <li key={site.slug}>
-                    <Button
-                      asChild
-                      size="lg"
-                      variant={site.slug === robot.demoSite ? 'default' : 'outline'}
-                      className="w-full justify-between"
-                    >
-                      <Link href={`/${robot.slug}/${site.slug}`}>
-                        {t('openAt', { site: site.name })}
-                        {site.slug === robot.demoSite ? (
-                          <Badge variant="gold">{t('recommended')}</Badge>
+                {kioskSites.map((site) => {
+                  const recommended = site.slug === robot.demoSite;
+                  return (
+                    <li key={site.slug}>
+                      <Link
+                        href={`/${robot.slug}/${site.slug}`}
+                        className={cn(
+                          'focus-visible:outline-ring flex min-h-13 w-full items-center justify-between gap-3 rounded-md px-4 py-3 text-left font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2',
+                          recommended
+                            ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+                            : 'border-border hover:bg-surface-muted border',
+                        )}
+                      >
+                        <span>{t('openAt', { site: site.name })}</span>
+                        {recommended ? (
+                          <Badge variant="gold" className="shrink-0">
+                            {t('recommended')}
+                          </Badge>
                         ) : null}
                       </Link>
-                    </Button>
+                    </li>
+                  );
+                })}
+                {robot.slug === 'kiosk' ? (
+                  <li>
+                    <Link
+                      href={`/${robot.slug}/${robot.demoSite}/preview`}
+                      className="text-primary inline-flex min-h-11 items-center font-semibold underline-offset-4 hover:underline"
+                    >
+                      {t('openPortrait')}
+                    </Link>
                   </li>
-                ))}
+                ) : null}
               </ul>
             </li>
           ))}

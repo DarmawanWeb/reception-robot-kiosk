@@ -5,10 +5,11 @@
   },
   "Launcher": {
     "title": "Receptionist robot kiosk demo",
-    "intro": "Pick a robot and a sample venue. This is the same screen shown on the robot’s 13.3-inch touchscreen.",
+    "intro": "Pick a robot and a sample venue. Snow and Timo use a 13.3-inch touchscreen; Taksu Kiosk uses a 24-inch portrait screen.",
     "recommended": "Recommended",
     "openAt": "Open at {site}",
-    "tip": "Use the full-screen button at the top right for a lobby-like experience.",
+    "openPortrait": "See it on the 24-inch totem",
+    "tip": "Use the full-screen button on the kiosk screen for the lobby experience.",
     "backToSite": "Back to the {brand} website",
     "sampleNote": "All names, numbers, and schedules in this demo are sample data.",
     "studioTitle": "Have your own organisation?",
