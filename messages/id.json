@@ -235,5 +235,10 @@
     "missing": "Belum ada kios kustom. Buat dulu di Studio.",
     "toStudio": "Buka Studio",
     "customNote": "Kios kustom: data contoh disesuaikan dengan nama Anda."
+  },
+  "Preview": {
+    "title": "{robot} di {site}",
+    "back": "Kembali ke peluncur",
+    "hint": "Tata letaknya sama dengan layar 24 inci tegak. Klik layar untuk mencoba."
   }
 }

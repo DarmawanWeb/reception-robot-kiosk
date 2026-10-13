@@ -235,5 +235,10 @@
     "missing": "No custom kiosk yet. Create one in Studio first.",
     "toStudio": "Open Studio",
     "customNote": "Custom kiosk: sample data adapted to your name."
+  },
+  "Preview": {
+    "title": "{robot} at {site}",
+    "back": "Back to the launcher",
+    "hint": "Same layout as the 24-inch portrait screen. Click the screen to try it."
   }
 }
