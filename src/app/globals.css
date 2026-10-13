@@ -3,6 +3,50 @@
 
 @source '../../../../packages/ui/src';
 
+/*
+ * The kiosk screen grows with the display. Everything is sized in rem, and the root size
+ * follows the short side of the screen: 16px on a 13.3-inch robot screen at 1280×720,
+ * 24px on the 24-inch portrait totem at 1080×1920.
+ */
+html:has(.kiosk-screen) {
+  font-size: clamp(16px, calc(100vmin / 45), 28px);
+}
+
+:root {
+  /* Papan nama: the timber signboard with gold lettering on every Balinese office. */
+  --board: #1c1712;
+  --board-frame: #5b3b1e;
+  --board-line: #8a6a3a;
+  --board-ink: #f3e3b8;
+  /* Thermal paper looks the same in light and dark mode. */
+  --paper: #ffffff;
+  --paper-ink: #000000;
+  --paper-muted: #4b4b4b;
+}
+
+@theme inline {
+  --color-board: var(--board);
+  --color-board-frame: var(--board-frame);
+  --color-board-line: var(--board-line);
+  --color-board-ink: var(--board-ink);
+  --color-paper: var(--paper);
+  --color-paper-ink: var(--paper-ink);
+  --color-paper-muted: var(--paper-muted);
+}
+
+@theme {
+  --animate-ticket-out: ticket-out 1.1s cubic-bezier(0.25, 0.8, 0.3, 1) both;
+
+  @keyframes ticket-out {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+}
+
 /* Kiosk screens are touch-first: no text selection or callouts on long press. */
 .kiosk-surface {
   -webkit-user-select: none;
@@ -15,6 +59,82 @@
 .kiosk-surface textarea {
   -webkit-user-select: text;
   user-select: text;
+}
+
+@layer components {
+  /*
+   * Text-size utilities reset line-height, which clips the stacked vowel signs of Aksara
+   * Bali. This keeps the room unless a leading utility asks for something else.
+   */
+  .aksara {
+    --tw-leading: 2.1;
+  }
+
+  .papan {
+    background: var(--board);
+    color: var(--board-ink);
+    border: 0.3rem solid var(--board-frame);
+    border-radius: var(--radius-md);
+    box-shadow: inset 0 0 0 2px var(--board-line);
+  }
+
+  /* Speech bubble next to the face. Its tail points up at the face in landscape, left in portrait. */
+  .speech {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+  .speech::before {
+    content: '';
+    position: absolute;
+    width: 0.9rem;
+    height: 0.9rem;
+    background: inherit;
+    border: inherit;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 0.15rem 0 0 0;
+    top: -0.5rem;
+    left: calc(50% - 0.45rem);
+    transform: rotate(45deg);
+  }
+  @media (orientation: portrait) {
+    .speech::before {
+      top: calc(50% - 0.45rem);
+      left: -0.5rem;
+      transform: rotate(-45deg);
+    }
+  }
+
+  /* The printer mouth the ticket comes out of. */
+  .printer-mouth {
+    height: 0.8rem;
+    margin-inline: -0.75rem;
+    border-radius: 999px;
+    background: var(--ink);
+    box-shadow:
+      inset 0 0.2rem 0.3rem rgb(0 0 0 / 0.55),
+      0 1px 0 rgb(255 255 255 / 0.08);
+  }
+
+  /* Thermal paper with a torn zigzag bottom edge. */
+  .ticket-paper {
+    --tooth: 0.9rem;
+    background: var(--paper);
+    color: var(--paper-ink);
+    padding-bottom: calc(var(--tooth) + 1.25rem);
+    -webkit-mask:
+      conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / var(--tooth)
+      100%;
+    mask:
+      conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / var(--tooth)
+      100%;
+  }
+  .ticket-rule {
+    border-top: 2px dashed var(--paper-ink);
+    opacity: 0.35;
+  }
 }
 
 /* Printing a queue ticket prints only the ticket, sized for 58 mm thermal paper. */
