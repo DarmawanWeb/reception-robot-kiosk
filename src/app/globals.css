@@ -137,8 +137,18 @@ html:has(.kiosk-screen) {
   }
 }
 
-/* Printing a queue ticket prints only the ticket, sized for 58 mm thermal paper. */
+/* Printing outputs only the ticket, on 80 mm thermal paper (72 mm printable). */
 @media print {
+  @page {
+    margin: 0;
+  }
+  html:has(.kiosk-screen) {
+    font-size: 12px;
+  }
+  html,
+  body {
+    background: #fff;
+  }
   body * {
     visibility: hidden;
   }
@@ -146,14 +156,26 @@ html:has(.kiosk-screen) {
   .print-slip * {
     visibility: visible;
   }
+  /* A filter makes its box the frame for fixed children, so the shadow goes for print. */
+  .ticket-drop {
+    /* biome-ignore lint/complexity/noImportantStyles: overrides the drop-shadow utility */
+    filter: none !important;
+  }
   .print-slip {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 58mm;
-    border: none;
-    padding: 0;
+    width: 72mm;
+    margin: 0 4mm;
+    padding: 4mm 0;
     color: #000;
     background: #fff;
+    box-shadow: none;
+    /* biome-ignore-start lint/complexity/noImportantStyles: the on-screen slide-out must not shift the print */
+    transform: none !important;
+    animation: none !important;
+    /* biome-ignore-end lint/complexity/noImportantStyles: the on-screen slide-out must not shift the print */
+    -webkit-mask: none;
+    mask: none;
   }
 }
