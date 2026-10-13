@@ -28,7 +28,7 @@ export default async function LauncherPage({ params }: { params: Promise<{ local
       <PolengBand />
       <header className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-5 sm:px-8">
         <a href={`${robotSiteUrl}/${locale}`} aria-label={t('backToSite', { brand: names.robot })}>
-          <Logo />
+          <Logo name={names.robot} />
         </a>
         <LanguageToggle />
       </header>
@@ -44,7 +44,7 @@ export default async function LauncherPage({ params }: { params: Promise<{ local
             priority
             placeholder="blur"
             sizes="(min-width: 1152px) 72rem, 100vw"
-            className="h-auto max-h-[28rem] w-full object-cover"
+            className="h-auto max-h-[28rem] w-full object-cover object-top"
           />
         </div>
         <ul className="mt-10 grid gap-6 lg:grid-cols-3">
