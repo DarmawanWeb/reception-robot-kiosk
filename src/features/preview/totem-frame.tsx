@@ -57,6 +57,11 @@ export function TotemFrame({ src, title }: { src: string; title: string }) {
   const [scale, setScale] = useState(0.4);
 
   useEffect(() => {
+    // A phone held upright is already a portrait screen: open the kiosk itself, full size.
+    if (window.matchMedia('(max-width: 639px) and (orientation: portrait)').matches) {
+      window.location.replace(src);
+      return;
+    }
     const resize = () => {
       const byHeight = (window.innerHeight - FIXED_HEIGHT) / TOTAL_HEIGHT;
       const byWidth = (window.innerWidth - 96) / SCREEN.width;
@@ -65,7 +70,7 @@ export function TotemFrame({ src, title }: { src: string; title: string }) {
     resize();
     window.addEventListener('resize', resize);
     return () => window.removeEventListener('resize', resize);
-  }, []);
+  }, [src]);
 
   const width = Math.round(SCREEN.width * scale);
   const height = Math.round(SCREEN.height * scale);
