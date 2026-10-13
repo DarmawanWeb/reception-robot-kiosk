@@ -153,6 +153,8 @@
     "placeholder": "Type a name, for example Wayan",
     "hint": "A plain e reads like the e in Ketut. Type é for the sound in Madé.",
     "empty": "Your Aksara Bali will appear here",
+    "print": "Print a keepsake",
+    "keepsakeTitle": "A keepsake from Bali",
     "note": "Automatic transliteration. For inscriptions or official signs, ask a Balinese language adviser to review it."
   },
   "Calendar": {

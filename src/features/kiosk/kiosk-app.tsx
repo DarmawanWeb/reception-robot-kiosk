@@ -236,7 +236,7 @@ export function KioskApp({
               actions={actions}
             />
           ) : null}
-          {view === 'aksara' ? <AksaraView /> : null}
+          {view === 'aksara' ? <AksaraView site={site} locale={locale} /> : null}
           {view === 'culture' ? <CultureView site={site} locale={locale} /> : null}
         </main>
       </div>
