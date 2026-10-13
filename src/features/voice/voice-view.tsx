@@ -195,7 +195,7 @@ export function VoiceView({
           : t('tapToTalk');
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[22rem_1fr]">
+    <div className="grid gap-8 landscape:grid-cols-[17rem_minmax(0,1fr)]">
       <div className="flex flex-col items-center gap-5 text-center">
         <button
           type="button"
@@ -212,20 +212,22 @@ export function VoiceView({
             <Mic className="relative size-16" aria-hidden />
           )}
         </button>
-        <p aria-live="polite" className="text-xl font-semibold">
+        <p aria-live="polite" className="text-[1.3rem] font-bold">
           {status}
         </p>
-        {engine ? <p className="text-muted-foreground text-xs">{engine}</p> : null}
+        {engine ? <p className="text-muted-foreground text-[0.85rem]">{engine}</p> : null}
         {notice ? (
-          <p role="alert" className="text-danger text-sm font-semibold">
+          <p role="alert" className="text-danger text-[1rem] font-semibold">
             {notice}
           </p>
         ) : null}
       </div>
 
-      <div className="flex min-h-[24rem] flex-col gap-4">
+      <div className="flex min-h-[22rem] flex-col gap-4">
         <ol aria-live="polite" className="flex flex-1 flex-col gap-3 overflow-y-auto">
-          {turns.length === 0 ? <li className="text-muted-foreground">{t('empty')}</li> : null}
+          {turns.length === 0 ? (
+            <li className="text-muted-foreground text-[1.1rem]">{t('empty')}</li>
+          ) : null}
           {turns.map((turn) => (
             <li
               key={turn.id}
@@ -234,12 +236,12 @@ export function VoiceView({
                 turn.role === 'user' ? 'items-end self-end' : 'self-start',
               )}
             >
-              <span className="text-muted-foreground text-xs font-semibold">
+              <span className="text-muted-foreground text-[0.85rem] font-semibold">
                 {turn.role === 'user' ? t('you') : robot.name}
               </span>
               <p
                 className={cn(
-                  'rounded-xl px-4 py-3 text-lg leading-relaxed',
+                  'rounded-xl px-4 py-3 text-[1.15rem] leading-relaxed',
                   turn.role === 'user'
                     ? 'bg-primary text-primary-foreground'
                     : 'border-border bg-surface border',
@@ -264,12 +266,12 @@ export function VoiceView({
             maxLength={500}
             placeholder={t('typeInstead')}
             aria-label={t('typeInstead')}
-            className="border-border bg-surface h-14 min-w-0 flex-1 rounded-md border px-4 text-lg"
+            className="border-border bg-surface focus-visible:border-primary h-[3.75rem] min-w-0 flex-1 rounded-md border-2 px-4 text-[1.15rem]"
           />
           <Button
             type="submit"
             size="lg"
-            className="h-14"
+            className="h-[3.75rem] px-6"
             disabled={!draft.trim() || phase === 'thinking'}
           >
             <Send aria-hidden />

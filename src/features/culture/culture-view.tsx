@@ -6,21 +6,23 @@ import { AksaraText } from '@taksu/ui/brand/aksara-text';
 
 export function CultureView({ site, locale }: { site: KioskSite; locale: Locale }) {
   return (
-    <div className="max-w-4xl">
-      <div className="border-border bg-surface rounded-xl border p-6">
+    <div className="flex max-w-[54rem] flex-col gap-8">
+      <div>
         <AksaraText
           aksara={OM_SWASTIASTU.aksara}
           decorative
-          className="text-primary block text-3xl"
+          className="text-primary block text-[2.1rem] leading-[1.9]"
         />
-        <p className="font-display text-3xl font-bold">{OM_SWASTIASTU.latin}</p>
-        <p className="text-muted-foreground mt-1 text-lg">{OM_SWASTIASTU.meaning[locale]}</p>
+        <p className="font-display text-[2.3rem] leading-none font-bold [font-stretch:88%]">
+          {OM_SWASTIASTU.latin}
+        </p>
+        <p className="text-muted-foreground mt-2 text-[1.15rem]">{OM_SWASTIASTU.meaning[locale]}</p>
       </div>
-      <ul className="mt-6 grid gap-5 md:grid-cols-2">
+      <ul className="grid gap-x-10 gap-y-7 landscape:grid-cols-2">
         {site.culture.map((note) => (
           <li key={note.id} className="border-primary border-t-2 pt-4">
-            <h2 className="text-xl font-semibold">{pick(note.title, locale)}</h2>
-            <p className="text-muted-foreground mt-2 text-lg leading-relaxed">
+            <h3 className="text-[1.3rem] leading-tight font-bold">{pick(note.title, locale)}</h3>
+            <p className="text-muted-foreground mt-2 text-[1.1rem] leading-relaxed">
               {pick(note.body, locale)}
             </p>
           </li>

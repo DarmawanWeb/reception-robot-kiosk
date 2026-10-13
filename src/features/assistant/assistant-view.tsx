@@ -97,7 +97,7 @@ export function AssistantView({
   };
 
   return (
-    <div className="flex h-full min-h-[28rem] flex-col gap-4">
+    <div className="flex min-h-[24rem] flex-1 flex-col gap-4">
       <ol aria-live="polite" className="flex flex-1 flex-col gap-3 overflow-y-auto">
         {messages.map((message) => (
           <li
@@ -107,12 +107,12 @@ export function AssistantView({
               message.role === 'user' ? 'items-end self-end' : 'self-start',
             )}
           >
-            <span className="text-muted-foreground text-xs font-semibold">
+            <span className="text-muted-foreground text-[0.85rem] font-semibold">
               {message.role === 'user' ? t('you') : robot.name}
             </span>
             <p
               className={cn(
-                'rounded-xl px-4 py-3 text-lg leading-relaxed',
+                'rounded-xl px-4 py-3 text-[1.15rem] leading-relaxed',
                 message.role === 'user'
                   ? 'bg-primary text-primary-foreground'
                   : 'border-border bg-surface border',
@@ -127,19 +127,21 @@ export function AssistantView({
               </Button>
             ) : null}
             {message.offline ? (
-              <span className="text-muted-foreground text-xs">{t('offline')}</span>
+              <span className="text-muted-foreground text-[0.85rem]">{t('offline')}</span>
             ) : null}
           </li>
         ))}
         {pending ? (
-          <li className="text-muted-foreground animate-pulse self-start">
+          <li className="text-muted-foreground self-start text-[1.1rem]">
             {t('thinking', { robot: robot.name })}
           </li>
         ) : null}
         <div ref={listEnd} />
       </ol>
       <div>
-        <p className="text-muted-foreground mb-2 text-sm font-semibold">{t('suggestions')}</p>
+        <p className="text-muted-foreground mb-2.5 text-[0.95rem] font-semibold">
+          {t('suggestions')}
+        </p>
         <ul className="flex flex-wrap gap-2">
           {site.faq.slice(0, 4).map((item) => (
             <li key={item.id}>
@@ -147,7 +149,7 @@ export function AssistantView({
                 type="button"
                 disabled={pending}
                 onClick={() => void ask(pick(item.question, locale))}
-                className="border-border bg-surface hover:border-primary rounded-full border px-4 py-2 text-sm font-semibold disabled:opacity-50"
+                className="border-border bg-surface hover:border-primary min-h-11 rounded-full border-2 px-4 py-2 text-left text-[0.95rem] font-semibold disabled:opacity-50"
               >
                 {pick(item.question, locale)}
               </button>
@@ -162,11 +164,11 @@ export function AssistantView({
           maxLength={500}
           placeholder={t('placeholder')}
           aria-label={t('placeholder')}
-          className="border-border bg-surface h-16 min-w-0 flex-1 rounded-md border px-4 text-lg"
+          className="border-border bg-surface focus-visible:border-primary h-16 min-w-0 flex-1 rounded-md border-2 px-4 text-[1.15rem]"
         />
         <Button type="submit" size="xl" disabled={pending || !draft.trim()}>
           <Send aria-hidden />
-          <span className="hidden sm:inline">{t('send')}</span>
+          <span className="max-sm:sr-only">{t('send')}</span>
         </Button>
       </form>
     </div>

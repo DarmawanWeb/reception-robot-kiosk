@@ -42,8 +42,8 @@ function MemberButton({
       aria-pressed={selected}
       onClick={() => onSelect(member.id)}
       className={cn(
-        'bg-surface flex w-full items-center gap-3 rounded-lg border text-left transition-colors',
-        compact ? 'p-2.5' : 'p-3.5',
+        'bg-surface flex w-full items-center gap-3 rounded-lg border-2 text-left transition-colors',
+        compact ? 'p-3' : 'p-4',
         selected ? 'border-primary ring-primary/40 ring-2' : 'border-border hover:border-primary',
       )}
     >
@@ -51,16 +51,23 @@ function MemberButton({
         aria-hidden
         className={cn(
           'bg-primary text-primary-foreground flex shrink-0 items-center justify-center rounded-full font-bold',
-          compact ? 'size-9 text-xs' : 'size-11 text-sm',
+          compact ? 'size-10 text-[0.8rem]' : 'size-12 text-[0.95rem]',
         )}
       >
         {initials(member.name)}
       </span>
       <span className="min-w-0">
-        <span className={cn('block font-semibold', compact ? 'text-sm' : 'text-base')}>
+        <span
+          className={cn(
+            'block leading-snug font-bold',
+            compact ? 'text-[0.95rem]' : 'text-[1.05rem]',
+          )}
+        >
           {member.name}
         </span>
-        <span className="text-muted-foreground block text-sm">{pick(member.role, locale)}</span>
+        <span className="text-muted-foreground block text-[0.9rem] leading-snug">
+          {pick(member.role, locale)}
+        </span>
       </span>
     </button>
   );
@@ -134,27 +141,27 @@ export function OrgChart({
         </ul>
       </div>
 
-      <div aria-live="polite" className="border-border bg-surface-muted rounded-xl border p-5">
+      <div aria-live="polite" className="border-border bg-surface-muted rounded-xl border p-6">
         {selected ? (
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <p className="text-xl font-semibold">{selected.name}</p>
-              <p className="text-muted-foreground">{pick(selected.role, locale)}</p>
+              <p className="text-[1.35rem] font-bold">{selected.name}</p>
+              <p className="text-muted-foreground text-[1.05rem]">{pick(selected.role, locale)}</p>
               {room ? (
-                <p className="mt-1">
+                <p className="mt-1 text-[1.05rem]">
                   {t('room')}: <span className="font-semibold">{pick(room.name, locale)}</span>
                 </p>
               ) : null}
             </div>
             {room ? (
-              <Button size="lg" onClick={() => onGuide(room.id)}>
+              <Button size="xl" onClick={() => onGuide(room.id)}>
                 <Route aria-hidden />
                 {t('takeMe')}
               </Button>
             ) : null}
           </div>
         ) : (
-          <p className="text-muted-foreground">{t('select')}</p>
+          <p className="text-muted-foreground text-[1.05rem]">{t('select')}</p>
         )}
       </div>
     </div>
