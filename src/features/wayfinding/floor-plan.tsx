@@ -2,7 +2,7 @@
 
 import { type KioskSite, type Locale, pick, type RoomCategory } from '@taksu/content';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { type Point, pointAlong, routePoints } from './route';
+import { type Point, pointAlong, roomLabel, routePoints } from './route';
 
 const categoryFill: Record<RoomCategory, string> = {
   service: 'var(--primary)',
@@ -82,7 +82,8 @@ export function FloorPlan({
       {map.rooms.map((room) => {
         const name = pick(room.name, locale);
         const active = room.id === destinationRoomId;
-        const fontSize = Math.max(11, Math.min(20, (room.width - 14) / (name.length * 0.56)));
+        const label = roomLabel(name, room.width);
+        const cx = room.x + room.width / 2;
         return (
           <g key={room.id}>
             <rect
@@ -97,15 +98,21 @@ export function FloorPlan({
               strokeWidth={active ? 5 : 2}
             />
             <text
-              x={room.x + room.width / 2}
+              x={cx}
               y={room.y + room.height / 2}
               textAnchor="middle"
               dominantBaseline="middle"
-              fontSize={fontSize}
+              fontSize={label.size}
               fontWeight={active ? 700 : 600}
               fill="var(--foreground)"
             >
-              {name}
+              {label.lines.length === 1
+                ? label.lines[0]
+                : label.lines.map((line, index) => (
+                    <tspan key={line} x={cx} dy={index === 0 ? '-0.6em' : '1.2em'}>
+                      {line}
+                    </tspan>
+                  ))}
             </text>
           </g>
         );

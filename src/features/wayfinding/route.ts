@@ -134,3 +134,21 @@ export function pointAlong(points: readonly Point[], t: number): Point | null {
   }
   return points.at(-1) ?? null;
 }
+
+/**
+ * A room name sized to fit its box. Long names break onto two lines at the space nearest the
+ * middle rather than shrinking to an unreadable size.
+ */
+export function roomLabel(name: string, width: number): { lines: string[]; size: number } {
+  const sizeFor = (text: string) => (width - 14) / (text.length * 0.56);
+  const clamp = (size: number) => Math.max(11, Math.min(20, size));
+  const spaces = [...name.matchAll(/ /g)].map((match) => match.index);
+  if (sizeFor(name) >= 15 || spaces.length === 0)
+    return { lines: [name], size: clamp(sizeFor(name)) };
+  const middle = name.length / 2;
+  const at = spaces.reduce((best, index) =>
+    Math.abs(index - middle) < Math.abs(best - middle) ? index : best,
+  );
+  const lines = [name.slice(0, at), name.slice(at + 1)];
+  return { lines, size: clamp(Math.min(...lines.map(sizeFor))) };
+}

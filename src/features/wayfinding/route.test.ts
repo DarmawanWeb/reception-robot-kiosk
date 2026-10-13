@@ -1,6 +1,6 @@
 import { getSite } from '@taksu/content';
 import { describe, expect, it } from 'vitest';
-import { describeRoute, findRoute, pointAlong } from './route';
+import { describeRoute, findRoute, pointAlong, roomLabel } from './route';
 
 const office = getSite('kantor-layanan')!.map;
 
@@ -51,5 +51,20 @@ describe('pointAlong', () => {
     expect(pointAlong(points, 0.5)).toEqual({ x: 10, y: 0 });
     expect(pointAlong(points, 0.75)).toEqual({ x: 10, y: 5 });
     expect(pointAlong(points, 1)).toEqual({ x: 10, y: 10 });
+  });
+});
+
+describe('roomLabel', () => {
+  it('keeps short names on one line', () => {
+    expect(roomLabel('Toilet', 120)).toEqual({ lines: ['Toilet'], size: 20 });
+  });
+
+  it('breaks long names in a narrow room at the space nearest the middle', () => {
+    expect(roomLabel('Loket B: Perizinan', 88).lines).toEqual(['Loket B:', 'Perizinan']);
+    expect(roomLabel('Ruang Pengaduan', 88).lines).toEqual(['Ruang', 'Pengaduan']);
+  });
+
+  it('never goes below the smallest readable size', () => {
+    expect(roomLabel('Kependudukan', 40).size).toBe(11);
   });
 });
