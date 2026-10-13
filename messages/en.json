@@ -120,10 +120,11 @@
     "noEscort": "This kiosk does not move. Print a route slip or scan the QR to open the map on your phone."
   },
   "Queue": {
-    "choose": "Choose a service",
     "average": "About {minutes} minutes per guest",
     "take": "Take a number",
     "ticketTitle": "Your queue number",
+    "yourNumber": "Your number is {code}",
+    "waitAt": "Keep this ticket and wait to be called at {counter}.",
     "inAksara": "In Balinese numerals",
     "ahead": "{count, plural, =0 {Nobody is ahead of you} one {# person ahead of you} other {# people ahead of you}}",
     "estimate": "Estimated wait {minutes} minutes",
@@ -196,6 +197,8 @@
     "submit": "Register and print pass",
     "required": "Fill in your name and purpose first.",
     "passTitle": "Visitor pass",
+    "readyTitle": "Your visitor pass is ready, {name}",
+    "readyBody": "Print this pass and show it at the front desk. Return it when you leave.",
     "passId": "Pass number",
     "room": "Room",
     "issued": "Checked in at {time} WITA",

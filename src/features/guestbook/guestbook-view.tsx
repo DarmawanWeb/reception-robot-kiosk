@@ -4,12 +4,12 @@ import { transliterate } from '@taksu/bali';
 import { flattenOrganization, type KioskSite, type Locale, pick } from '@taksu/content';
 import { AksaraText } from '@taksu/ui/brand/aksara-text';
 import { Button } from '@taksu/ui/components/button';
-import { Printer, Route } from 'lucide-react';
+import { Check, Printer, Route } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { type FormEvent, useState } from 'react';
 import { formatWitaTime } from '../kiosk/hooks';
 import type { KioskActions } from '../kiosk/types';
-import { PrintSlip, QrImage } from '../print/print-slip';
+import { PrintSlip, QrImage, SlipHeader } from '../print/print-slip';
 import {
   counterKey,
   nextSequence,
@@ -20,6 +20,10 @@ import {
 } from './guestbook';
 
 const purposes: VisitPurpose[] = ['meet', 'service', 'visit', 'delivery', 'other'];
+
+const fieldClass =
+  'border-border bg-surface focus-visible:border-primary h-[3.75rem] w-full rounded-md border-2 px-4 text-[1.2rem] font-normal';
+const labelClass = 'flex flex-col gap-2 text-[1.1rem] font-bold';
 
 function readStorage(key: string): string | null {
   try {
@@ -85,26 +89,28 @@ export function GuestbookView({
     const host = members.find((member) => member.id === pass.hostId);
     const room = site.map.rooms.find((entry) => entry.id === host?.roomId);
     return (
-      <div className="flex flex-col items-start gap-6">
+      <div className="grid items-start gap-8 landscape:grid-cols-[21rem_minmax(0,1fr)] portrait:justify-items-center">
         <PrintSlip>
-          <AksaraText latin={site.name} decorative className="text-primary block text-sm" />
-          <p className="font-semibold">{site.name}</p>
-          <p className="font-display mt-3 text-xl font-bold">{t('passTitle')}</p>
+          <SlipHeader siteName={site.name} />
+          <p className="mt-4 text-[0.95rem] font-semibold">{t('passTitle')}</p>
           <AksaraText
             aksara={transliterate(pass.name)}
             decorative
-            className="mt-2 block text-3xl"
+            className="mt-1 block text-[1.9rem] leading-[1.9] break-words"
           />
-          <p className="font-display text-3xl font-bold break-words">{pass.name}</p>
-          {pass.origin ? <p className="text-muted-foreground">{pass.origin}</p> : null}
-          <dl className="mt-4 space-y-1 text-sm">
+          <p className="font-display text-[1.9rem] leading-tight font-bold break-words">
+            {pass.name}
+          </p>
+          {pass.origin ? <p className="text-paper-muted text-[0.95rem]">{pass.origin}</p> : null}
+          <div className="ticket-rule my-4" />
+          <dl className="space-y-1 text-left text-[0.95rem]">
             <div>
-              <dt className="inline font-semibold">{t('purpose')}: </dt>
+              <dt className="inline font-bold">{t('purpose')}: </dt>
               <dd className="inline">{t(`purposes.${pass.purpose}`)}</dd>
             </div>
             {host ? (
               <div>
-                <dt className="inline font-semibold">{t('host')}: </dt>
+                <dt className="inline font-bold">{t('host')}: </dt>
                 <dd className="inline">
                   {host.name}, {pick(host.role, locale)}
                 </dd>
@@ -112,66 +118,74 @@ export function GuestbookView({
             ) : null}
             {room ? (
               <div>
-                <dt className="inline font-semibold">{t('room')}: </dt>
+                <dt className="inline font-bold">{t('room')}: </dt>
                 <dd className="inline">{pick(room.name, locale)}</dd>
               </div>
             ) : null}
           </dl>
           <div className="mt-4">
-            <QrImage value={passQrPayload(pass, site.slug)} label={`${t('passId')} ${pass.id}`} />
+            <QrImage
+              value={passQrPayload(pass, site.slug)}
+              size={104}
+              label={`${t('passId')} ${pass.id}`}
+            />
           </div>
-          <p className="mt-2 font-mono text-sm font-semibold tracking-wide">{pass.id}</p>
-          <p className="text-muted-foreground text-xs">
+          <p className="mt-1 text-[0.95rem] font-bold tracking-wide tabular-nums">{pass.id}</p>
+          <p className="text-paper-muted text-[0.8rem]">
             {t('issued', { time: formatWitaTime(pass.issuedAt, locale) })}
           </p>
-          <p className="text-muted-foreground mt-3 text-xs">{t('returnNote')}</p>
+          <p className="text-paper-muted mt-2 text-[0.8rem]">{t('returnNote')}</p>
         </PrintSlip>
-        <div className="flex flex-wrap gap-3">
-          <Button size="xl" onClick={() => window.print()}>
-            <Printer aria-hidden />
-            {t('print')}
-          </Button>
-          {room ? (
-            <Button size="xl" variant="outline" onClick={() => actions.guideTo(room.id)}>
-              <Route aria-hidden />
-              {t('guide', { room: pick(room.name, locale) })}
+
+        <div className="flex flex-col gap-6 portrait:items-center portrait:text-center">
+          <div>
+            <p className="font-display text-[2rem] leading-tight font-bold">
+              {t('readyTitle', { name: pass.name })}
+            </p>
+            <p className="text-muted-foreground mt-2 max-w-[28rem] text-[1.15rem]">
+              {t('readyBody')}
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 landscape:max-w-[22rem] portrait:w-full portrait:max-w-[24rem]">
+            <Button size="xl" onClick={() => window.print()}>
+              <Printer aria-hidden />
+              {t('print')}
             </Button>
-          ) : null}
-          <Button size="xl" variant="ghost" onClick={onDone}>
-            {t('done')}
-          </Button>
+            {room ? (
+              <Button size="xl" variant="outline" onClick={() => actions.guideTo(room.id)}>
+                <Route aria-hidden />
+                {t('guide', { room: pick(room.name, locale) })}
+              </Button>
+            ) : null}
+            <Button size="xl" variant="ghost" onClick={onDone}>
+              <Check aria-hidden />
+              {t('done')}
+            </Button>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex max-w-2xl flex-col gap-5">
-      <p className="text-muted-foreground">{t('intro')}</p>
-      <label className="flex flex-col gap-2 text-lg font-semibold">
-        {t('name')}
-        <input
-          name="name"
-          required
-          autoComplete="name"
-          className="border-border bg-surface h-14 rounded-md border px-4 text-xl"
-        />
-      </label>
-      <label className="flex flex-col gap-2 text-lg font-semibold">
-        {t('origin')}
-        <input
-          name="origin"
-          autoComplete="organization"
-          className="border-border bg-surface h-14 rounded-md border px-4 text-xl"
-        />
-      </label>
+    <form onSubmit={handleSubmit} noValidate className="flex max-w-[44rem] flex-col gap-6">
+      <div className="grid gap-6 landscape:grid-cols-2">
+        <label className={labelClass}>
+          {t('name')}
+          <input name="name" required autoComplete="name" className={fieldClass} />
+        </label>
+        <label className={labelClass}>
+          {t('origin')}
+          <input name="origin" autoComplete="organization" className={fieldClass} />
+        </label>
+      </div>
       <fieldset>
-        <legend className="mb-2 text-lg font-semibold">{t('purpose')}</legend>
-        <div className="flex flex-wrap gap-2">
+        <legend className="mb-2.5 text-[1.1rem] font-bold">{t('purpose')}</legend>
+        <div className="flex flex-wrap gap-2.5">
           {purposes.map((purpose, index) => (
             <label
               key={purpose}
-              className="border-border bg-surface has-[:checked]:border-primary has-[:checked]:bg-primary has-[:checked]:text-primary-foreground flex min-h-12 cursor-pointer items-center gap-2 rounded-full border px-4"
+              className="border-border bg-surface has-[:checked]:border-primary has-[:checked]:bg-primary has-[:checked]:text-primary-foreground has-[:focus-visible]:outline-ring flex min-h-[3.25rem] cursor-pointer items-center rounded-full border-2 px-5 text-[1.05rem] font-semibold has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2"
             >
               <input
                 type="radio"
@@ -185,39 +199,41 @@ export function GuestbookView({
           ))}
         </div>
       </fieldset>
-      <label className="flex flex-col gap-2 text-lg font-semibold">
-        {t('host')}
-        <select
-          name="host"
-          className="border-border bg-surface h-14 rounded-md border px-4 text-lg"
-        >
-          <option value="">{t('hostUnknown')}</option>
-          {members.map((member) => (
-            <option key={member.id} value={member.id}>
-              {member.name}, {pick(member.role, locale)}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label className="flex flex-col gap-2 text-lg font-semibold">
-        {t('phone')}
-        <input
-          name="phone"
-          type="tel"
-          inputMode="tel"
-          autoComplete="tel"
-          className="border-border bg-surface h-14 rounded-md border px-4 text-xl"
-        />
-      </label>
+      <div className="grid gap-6 landscape:grid-cols-2">
+        <label className={labelClass}>
+          {t('host')}
+          <select name="host" className={fieldClass}>
+            <option value="">{t('hostUnknown')}</option>
+            {members.map((member) => (
+              <option key={member.id} value={member.id}>
+                {member.name}, {pick(member.role, locale)}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className={labelClass}>
+          {t('phone')}
+          <input
+            name="phone"
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel"
+            className={fieldClass}
+          />
+        </label>
+      </div>
       {error ? (
-        <p role="alert" className="text-danger font-semibold">
+        <p role="alert" className="text-danger text-[1.05rem] font-bold">
           {error}
         </p>
       ) : null}
-      <Button type="submit" size="xl" className="self-start">
-        <Printer aria-hidden />
-        {t('submit')}
-      </Button>
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+        <Button type="submit" size="xl">
+          <Printer aria-hidden />
+          {t('submit')}
+        </Button>
+        <p className="text-muted-foreground text-[0.95rem]">{t('intro')}</p>
+      </div>
     </form>
   );
 }

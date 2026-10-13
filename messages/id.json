@@ -120,10 +120,11 @@
     "noEscort": "Kios ini tidak berjalan. Cetak slip rute atau pindai QR untuk membuka peta di HP."
   },
   "Queue": {
-    "choose": "Pilih layanan",
     "average": "Rata-rata {minutes} menit per tamu",
     "take": "Ambil nomor",
     "ticketTitle": "Nomor antrean Anda",
+    "yourNumber": "Nomor Anda {code}",
+    "waitAt": "Simpan tiket ini dan tunggu panggilan di {counter}.",
     "inAksara": "Dalam angka Bali",
     "ahead": "{count, plural, =0 {Tidak ada antrean di depan Anda} other {# orang di depan Anda}}",
     "estimate": "Perkiraan menunggu {minutes} menit",
@@ -196,6 +197,8 @@
     "submit": "Daftar dan cetak kartu",
     "required": "Isi nama dan keperluan terlebih dahulu.",
     "passTitle": "Kartu tamu",
+    "readyTitle": "Kartu tamu untuk {name} siap",
+    "readyBody": "Cetak kartu ini dan tunjukkan ke petugas. Kembalikan saat pulang.",
     "passId": "Nomor kartu",
     "room": "Ruangan",
     "issued": "Masuk pukul {time} WITA",
