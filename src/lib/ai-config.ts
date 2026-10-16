@@ -15,7 +15,7 @@ export interface AiConfig {
 }
 
 const DEFAULT_ANTHROPIC_MODEL = 'claude-haiku-4-5-20251001';
-/** Custom model created by deploy/macmini/ollama/setup.sh. */
+/** Custom model created by infra/ollama/setup.sh in the TaksuTech workspace. */
 const DEFAULT_OLLAMA_MODEL = 'taksu-asisten';
 
 const emptyToUndefined = (value: unknown) => (value === '' ? undefined : value);

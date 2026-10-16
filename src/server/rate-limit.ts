@@ -8,7 +8,7 @@ export interface RateLimiter {
 }
 
 /**
- * Sliding-window limiter kept in memory. Good for one process per app (PM2 fork mode).
+ * Sliding-window limiter kept in memory. Good for one process per app, as in the Docker image.
  * Old keys are evicted first once `maxKeys` is reached, so memory stays bounded.
  */
 export function createRateLimiter({

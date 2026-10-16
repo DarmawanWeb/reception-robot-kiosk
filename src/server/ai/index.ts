@@ -33,7 +33,7 @@ async function modelReply(config: AiConfig, request: AssistantRequest): Promise<
   }
 }
 
-/** Model calls in flight in this server process (one PM2 process per app). */
+/** Model calls in flight in this server process (one Node.js process per container). */
 let activeModelCalls = 0;
 
 export async function generateReply(
