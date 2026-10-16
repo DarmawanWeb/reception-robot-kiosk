@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="128" height="128" role="img" aria-label="Taksu Tech reception robots">
+  <title>Taksu Tech reception robots</title>
+  <rect width="64" height="64" rx="16" fill="#26338a"/>
+  <g transform="translate(8 6.5) scale(1.5)">
+    <path fill="#ffffff" d="M2 30h12V3h-3v4H8v5H5v6H2zM30 30H18V3h3v4h3v5h3v6h3z"/>
+    <circle cx="16" cy="16.5" r="1.9" fill="#e6bd52"/>
+  </g>
+</svg>
