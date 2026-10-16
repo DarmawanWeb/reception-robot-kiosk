@@ -1,6 +1,6 @@
 {
   "name": "@taksu/kiosk",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -38,5 +38,8 @@
     "typescript": "~6.0.3",
     "vite": "^8.3.3",
     "vitest": "^5.0.3"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,mjs,cjs,json,jsonc,css}": "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
   }
 }
