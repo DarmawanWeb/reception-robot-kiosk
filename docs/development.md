@@ -11,7 +11,7 @@ git clone --recursive https://github.com/DarmawanWeb/TaksuTech.git && cd TaksuTe
 corepack enable                 # pnpm 10, Node 22.12 or newer
 pnpm install                    # also points this submodule's git hooks at the workspace's
 cp apps/kiosk/.env.example apps/kiosk/.env.local
-pnpm dev:kiosk                  # http://localhost:3001/id
+pnpm dev:kiosk                  # http://localhost:3101/id
 ```
 
 With the example settings the assistant answers offline from the venue data, and the kiosk
@@ -25,8 +25,8 @@ Run from the workspace root (`pnpm --filter @taksu/kiosk <script>`) or from `app
 
 | Script | Does |
 |---|---|
-| `dev` | Next.js dev server on port 3001 |
-| `build`, `start` | Production build (standalone) and server, on port 3001 |
+| `dev` | Next.js dev server on port 3101 |
+| `build`, `start` | Production build (standalone) and server, on port 3101 |
 | `typecheck` | `next typegen`, then `tsc --noEmit` |
 | `test` | Vitest: the offline assistant, Ollama against a stub server, the speech client against a stub service, the rate limiter, queue tickets, visitor passes, wayfinding, Studio settings, messages |
 | `lint` | Biome lint |
@@ -88,7 +88,7 @@ The slip on screen (`max-w-[21rem]` in `src/features/print/print-slip.tsx`) is o
    `SPEECH_MODELS_DIR=./models uvicorn app.main:app --port 8000`. It downloads its models on
    first start.
 2. Set `SPEECH_URL=http://localhost:8000` in `apps/kiosk/.env.local` and restart `pnpm dev:kiosk`.
-3. Wait until `http://localhost:3001/api/speech/health` shows `stt` and the `tts` voices as true,
+3. Wait until `http://localhost:3101/api/speech/health` shows `stt` and the `tts` voices as true,
    then reload the kiosk: it reads that answer when the screen loads, and the server keeps it for
    30 seconds. Until then the kiosk uses the browser's voice.
 4. Open the Talk menu, allow the microphone, and press the mic. The line under it says whether the

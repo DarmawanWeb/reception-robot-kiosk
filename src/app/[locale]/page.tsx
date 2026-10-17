@@ -13,7 +13,7 @@ import { Link } from '@/i18n/navigation';
 import { resolveLocale } from '@/lib/locale';
 
 /** The receptionist robot site these demos belong to. */
-const robotSiteUrl = (process.env.NEXT_PUBLIC_ROBOT_URL ?? 'http://localhost:3004').replace(
+const robotSiteUrl = (process.env.NEXT_PUBLIC_ROBOT_URL ?? 'http://localhost:3104').replace(
   /\/+$/,
   '',
 );

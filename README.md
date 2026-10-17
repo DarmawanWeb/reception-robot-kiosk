@@ -97,7 +97,7 @@ messages/                 id.json and en.json; a test keeps their keys equal
 git clone --recursive https://github.com/DarmawanWeb/TaksuTech.git && cd TaksuTech
 pnpm install                      # the workspace, plus the commit hooks in each submodule
 cp apps/kiosk/.env.example apps/kiosk/.env.local
-pnpm dev:kiosk                    # http://localhost:3001/id
+pnpm dev:kiosk                    # http://localhost:3101/id
 pnpm --filter @taksu/kiosk test   # assistant, providers, speech client, queue, wayfinding, messages
 ```
 
